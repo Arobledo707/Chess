@@ -47,6 +47,13 @@ public:
         return pChessPiece;
     }
 
+    template<typename T>
+    std::shared_ptr<T>ReturnPiece(std::shared_ptr<SDL_Texture> pTexture, Chess::Color color, unsigned int index)
+    {
+        std::shared_ptr<T> piece = std::make_shared<T>(pTexture, color, index);
+        return piece;
+    }
+
 
 };
 

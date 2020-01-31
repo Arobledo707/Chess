@@ -15,13 +15,15 @@ public:
 public:
     Square();
     Square(Color color, std::pair<char, int> id, int xPos, int yPos);
+    Square operator=(Square other);
+    
     void Render(SDL_Renderer* pRenderer) const;
     void SetColor(Color color);
     void SetPiece(std::shared_ptr<Piece> piece);
 
 private:
     Color m_color;
-    std::weak_ptr<Piece> m_pPiece;
+    std::shared_ptr<Piece> m_pPiece;
     std::pair<char, int> m_Id;
     SDL_Rect m_rect; 
 };

@@ -13,3 +13,8 @@ void Pawn::Move()
 void Pawn::Render(SDL_Renderer* pRenderer)
 {
 }
+
+std::vector<unsigned int> Pawn::GetAvailableMoves()
+{
+    return std::vector<unsigned int>();
+}

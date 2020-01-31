@@ -14,7 +14,7 @@ public:
     void Render(SDL_Renderer* pRenderer) const;
 private:
     bool CheckColumns(int column);
-    void SpawnPawn(Chess::Color color, unsigned int index);
+    std::shared_ptr<Piece> SpawnPawn(Chess::Color color, unsigned int index);
     std::shared_ptr<Piece> SpawnPiece(int column, int row);
 
 private:

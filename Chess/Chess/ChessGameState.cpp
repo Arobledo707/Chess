@@ -8,6 +8,9 @@
 
 ChessGameState::ChessGameState()
 {
+    // CREATEBOARD NOT RESET
+    // CREATE PIECES
+    // reset board can clear pieces then create them
     m_pieceFactory = std::make_unique<PieceFactory>();
     m_pieces.reserve(Chess::kChessPieces);
     ResetBoard();
@@ -36,12 +39,18 @@ void ChessGameState::Render(SDL_Renderer* pRenderer) const
 
 bool ChessGameState::CheckColumns(int column)
 {
+    if (column == Chess::kBlackPawnColumn || column == Chess::kWhitePawnColumn
+        || column == Chess::kBlackPieceColumnn || column ==Chess::kWhitePieceColumn) 
+    {
+        return true;
+    }
     return false;
 }
 
-void ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
+std::shared_ptr<Piece> ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
 {
-    m_pieceFactory.get()->ReturnChessPiece<Chess::Piece::kPawn, Piece>(nullptr, color, index);
+    return m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, color, index);
+    //m_pieceFactory.get()->ReturnChessPiece<Chess::Piece::kPawn, Piece>(nullptr, color, index);
 }   
 
 std::shared_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
@@ -49,7 +58,22 @@ std::shared_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
     std::shared_ptr<Piece> piece;
     if (column == Chess::kBlackPawnColumn) 
     {
-        SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row);
+        piece = SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row);
+    }
+
+    else if(column == Chess::kWhitePawnColumn) 
+    {
+        piece = SpawnPawn(Chess::Color::kWhite, (column * Chess::kBoardWidth) + row);
+
+    }
+
+    else if (column == Chess::kBlackPieceColumnn) 
+    {
+
+    }
+    else if (column == Chess::kWhitePieceColumn) 
+    {
+
     }
 
     return piece;
@@ -86,7 +110,8 @@ void ChessGameState::ResetBoard()
 
             if (CheckColumns(y))
             {
-                SpawnPiece(y, x);
+               m_pieces.push_back(SpawnPiece(y, x));
+               m_squares[index].SetPiece(m_pieces.back());
             }
         }
         if (currentColor == Square::Color::Black)

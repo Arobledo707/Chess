@@ -13,6 +13,15 @@ Square::Square(Color color, std::pair<char, int> id, int xPos, int yPos)
     m_rect.w = 75;
 }
 
+Square Square::operator=(Square other)
+{
+    m_color = other.m_color;
+    m_pPiece = other.m_pPiece;
+    m_Id = other.m_Id;
+    m_rect = other.m_rect;
+    return *this;
+}
+
 void Square::Render(SDL_Renderer* pRenderer) const
 {
     if (m_color == Color::Black)

@@ -8,5 +8,8 @@ public:
     // Inherited via Piece
     virtual void Move() override;
     virtual void Render(SDL_Renderer* pRenderer) override;
+
+    // Inherited via Piece
+    virtual std::vector<unsigned int> GetAvailableMoves() override;
 };
 
