@@ -4,9 +4,11 @@
 #include <SDL.h>
 #include "../Chess/Factory/PieceFactory.h"
 #include "../Chess/Pieces/Pawn.h"
+#include "../Constants/ChessConstants.h"
 
 ChessGameState::ChessGameState()
 {
+    m_pieceFactory = std::make_unique<PieceFactory>();
     m_pieces.reserve(Chess::kChessPieces);
     ResetBoard();
 }
@@ -32,6 +34,27 @@ void ChessGameState::Render(SDL_Renderer* pRenderer) const
 
 }
 
+bool ChessGameState::CheckColumns(int column)
+{
+    return false;
+}
+
+void ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
+{
+    m_pieceFactory.get()->ReturnChessPiece<Chess::Piece::kPawn, Piece>(nullptr, color, index);
+}   
+
+std::shared_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
+{
+    std::shared_ptr<Piece> piece;
+    if (column == Chess::kBlackPawnColumn) 
+    {
+        SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row);
+    }
+
+    return piece;
+}
+
 void ChessGameState::ResetBoard()
 {
     //std::fill(&m_squares[0], &m_squares[0] + sizeof(m_squares)/sizeof(Square), Square());
@@ -49,21 +72,21 @@ void ChessGameState::ResetBoard()
         for (int x = 0; x < Chess::kBoardWidth; ++x)
         {
             index = (y * Chess::kBoardWidth) + x;
-            //m_squares[(y * kBoardWidth) + x].SetColor(currentColor);
             Square curSquare = Square(currentColor, currentId, Chess::kSquareWidth * x, Chess::kSquareWidth * y);
-            m_squares[index] = curSquare;//Square(currentColor, currentId, kSquareWidth, + kSquareWidth);
+            m_squares[index] = curSquare;
             currentId.second += 1;
             if (currentColor == Square::Color::Black)
             {
-                //m_blackSquares[blackSquareCounter] = &m_squares[(y * kBoardWidth) + x];
-               // ++blackSquareCounter;
                 currentColor = Square::Color::White;
             }
             else
             {
-                //m_whiteSquares[whiteSquareCounter] = &curSquare;
-                //++whiteSquareCounter;
                 currentColor = Square::Color::Black;
+            }
+
+            if (CheckColumns(y))
+            {
+                SpawnPiece(y, x);
             }
         }
         if (currentColor == Square::Color::Black)
@@ -75,5 +98,6 @@ void ChessGameState::ResetBoard()
             currentColor = Square::Color::Black;
         }
         currentId = std::make_pair(currentId.first + 1, 0);
+
     }
 }

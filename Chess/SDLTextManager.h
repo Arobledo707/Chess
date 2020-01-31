@@ -7,8 +7,6 @@ class SDLTextManager
 {
 public:
     SDLTextManager();
-
-
 private:
     std::unique_ptr<TTF_Font, decltype(&TTF_CloseFont)> m_pFont;
     std::unordered_map<Chess::Piece, std::shared_ptr<SDL_Texture>> m_Textures;

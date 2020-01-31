@@ -17,6 +17,7 @@ public:
     Square(Color color, std::pair<char, int> id, int xPos, int yPos);
     void Render(SDL_Renderer* pRenderer) const;
     void SetColor(Color color);
+    void SetPiece(std::shared_ptr<Piece> piece);
 
 private:
     Color m_color;
