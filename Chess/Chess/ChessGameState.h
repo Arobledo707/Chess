@@ -3,6 +3,7 @@
 #include "../Interfaces/Piece.h"
 #include "../Constants/ChessConstants.h"
 #include "Factory/PieceFactory.h"
+#include "../SDLTextureManager.h"
 #include <memory>
 #include <vector>
 struct SDL_Renderer;
@@ -12,7 +13,7 @@ public:
     ChessGameState();
     void SpawnPieces();
     void ResetBoard();
-    void Render(SDL_Renderer* pRenderer) const;
+    void Render(SDL_Renderer* pRenderer);
 private:
     bool CheckColumns(int column);
     std::shared_ptr<Piece> SpawnPawn(Chess::Color color, unsigned int index);
@@ -23,5 +24,6 @@ private:
     Square m_squares[Chess::kBoardSize];
     std::vector<std::shared_ptr<Piece>> m_pieces;
     std::unique_ptr<PieceFactory> m_pieceFactory;
+    SDLTextureManager m_textureManager;
 };
 

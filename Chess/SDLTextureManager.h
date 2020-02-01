@@ -10,17 +10,19 @@
 
 
 struct SDL_Texture;
-
+struct SDL_Renderer;
 class SDLTextureManager
 
 {
 public:
-    std::shared_ptr<SDL_Texture> GetTexture(Chess::Piece piece, Chess::Color color);
+    SDLTextureManager();
+    ~SDLTextureManager();
+    bool CreateTextures(SDL_Renderer* pRenderer);
+
+    SDL_Texture* GetTexture(Chess::Piece piece, Chess::Color color);
 
 private:
-    std::unordered_multimap<char, SDL_Texture*> m_textures;
-    bool CreateTextures();
-
+    std::unordered_map<char, SDL_Texture*> m_textures;
     static constexpr SDL_Color kBlack{ (Uint8)10, (Uint8)10, (Uint8)10, (Uint8)0 };
     static constexpr SDL_Color kWhite{ (Uint8)500, (Uint8)500, (Uint8)500, (Uint8)0 };
     static constexpr SDL_Rect kTextRect{ 0, 0, 75, 75 };

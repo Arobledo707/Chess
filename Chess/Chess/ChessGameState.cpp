@@ -11,6 +11,7 @@ ChessGameState::ChessGameState()
     // CREATEBOARD NOT RESET
     // CREATE PIECES
     // reset board can clear pieces then create them
+    //m_textureManager.CreateTextures();
     m_pieceFactory = std::make_unique<PieceFactory>();
     m_pieces.reserve(Chess::kChessPieces);
     ResetBoard();
@@ -21,19 +22,14 @@ void ChessGameState::SpawnPieces()
     SpawnPawns();
 }
 
-void ChessGameState::Render(SDL_Renderer* pRenderer) const
+void ChessGameState::Render(SDL_Renderer* pRenderer)
 {
-    //for (const Square* square: m_blackSquares) 
-    //{
-    //    square->Render(pRenderer);
-    //}
-
-    //SDL_SetRenderDrawColor(pRenderer, 0, 150, 150, 0);
-
-    //for (const Square* square : m_whiteSquares)
-    //{
-    //    square->Render(pRenderer);
-    //}
+    static bool texturesCreated = false; 
+    if (!texturesCreated) 
+    {
+        m_textureManager.CreateTextures(pRenderer);
+        texturesCreated = true;
+    }
 
     for (const Square& square: m_squares) 
     {
@@ -54,7 +50,7 @@ bool ChessGameState::CheckColumns(int column)
 
 std::shared_ptr<Piece> ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
 {
-    return m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, color, index);
+    return m_pieceFactory.get()->ReturnPiece<Pawn>(m_textureManager.GetTexture(Chess::Piece::kPawn, color), color, index);
     //m_pieceFactory.get()->ReturnChessPiece<Chess::Piece::kPawn, Piece>(nullptr, color, index);
 }   
 

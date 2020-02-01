@@ -1,11 +1,11 @@
 #include "Application.h"
 #include "Chess/ChessBoard.h"
 #include "Constants/Constants.h"
+
 #include <cassert>
 #include <filesystem>
 #include <iostream>
 #include <SDL.h>
-
 #include <SDL_ttf.h>
 //#include <experimental/filesystem>
 Application::Application()
