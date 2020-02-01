@@ -4,6 +4,7 @@
 void ChessBoard::StartGame()
 {
    m_currentState.ResetBoard();
+   m_currentState.SpawnPieces();
 }
 
 const int ChessBoard::GetCurrentPlayer() const

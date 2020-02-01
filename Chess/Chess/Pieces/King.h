@@ -1,7 +1,6 @@
 #pragma once
 #include "../../Interfaces/Piece.h"
-class King :
-    public Piece
+class King : public Piece
 {
 public:
     // Inherited via Piece

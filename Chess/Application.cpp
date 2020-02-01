@@ -42,6 +42,9 @@ void Application::Run()
     assert(m_pRenderer.get());
     assert(m_pWindow.get());
     assert(m_pBoard.get());
+
+    m_pBoard->StartGame();
+
     bool running = true;
     SDL_Event event;
     double deltaSeconds = 0.0;
@@ -72,7 +75,7 @@ void Application::Run()
         m_pBoard.get()->Render(m_pRenderer.get()); 
         
         TTF_Font* Sans = TTF_OpenFont(kArialFilePath, kFontSize);
-        SDL_Color col = { 10,10,10, 0 };
+        SDL_Color col = { 10, 10, 10, 0 };
         SDL_Surface* surface = TTF_RenderText_Solid(Sans, "P", col);
         SDL_Texture* texture = SDL_CreateTextureFromSurface(m_pRenderer.get(), surface);
         SDL_Rect textRect;

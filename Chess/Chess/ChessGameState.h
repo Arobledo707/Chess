@@ -10,18 +10,17 @@ class ChessGameState
 {
 public:
     ChessGameState();
+    void SpawnPieces();
     void ResetBoard();
     void Render(SDL_Renderer* pRenderer) const;
 private:
     bool CheckColumns(int column);
     std::shared_ptr<Piece> SpawnPawn(Chess::Color color, unsigned int index);
     std::shared_ptr<Piece> SpawnPiece(int column, int row);
+    void SpawnPawns();
 
 private:
-    
     Square m_squares[Chess::kBoardSize];
-    Square* m_blackSquares[Chess::kBoardWidth / 2];
-    Square* m_whiteSquares[Chess::kBoardWidth / 2];
     std::vector<std::shared_ptr<Piece>> m_pieces;
     std::unique_ptr<PieceFactory> m_pieceFactory;
 };

@@ -21,13 +21,13 @@ namespace Chess
 
     enum class Piece : char 
     {
-        kPawn = 1,
-        kKnight = 2,
-        kBishop = 3,
-        kRook= 4,
-        kQueen = 5,
-        kKing = 6,
-        kInvalid = 7
+        kPawn = 'P',
+        kKnight = 'N',
+        kBishop = 'B',
+        kRook = 'R',
+        kQueen = 'Q',
+        kKing = 'K',
+        kInvalid = 'I'
     };
 };
 
