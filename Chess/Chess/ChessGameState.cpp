@@ -109,7 +109,7 @@ void ChessGameState::SpawnPawns()
 void ChessGameState::ResetBoard()
 {
     //std::fill(&m_squares[0], &m_squares[0] + sizeof(m_squares)/sizeof(Square), Square());
-    PieceFactory pf;
+    //PieceFactory pf;
     //pf.ReturnUnique<Pawn>();
     
     Square::Color currentColor = Square::Color::Black;

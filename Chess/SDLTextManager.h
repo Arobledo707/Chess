@@ -1,9 +1,9 @@
 #pragma once
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include <memory>
 #include <unordered_map>
-#include "SDL_ttf.h"
 #include "Constants/ChessConstants.h"
-#include <SDL.h>
 
 //////////DSASGLEFJSLFLSKDFJLFJDSLFJDSLKFJLFJDSLF
 class SDLTextManager

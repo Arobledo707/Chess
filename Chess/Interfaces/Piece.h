@@ -8,7 +8,7 @@ class Piece
 {
 public:
     Piece(std::shared_ptr<SDL_Texture> pTexture, Chess::Color color, unsigned int index) 
-        : m_pTexture(pTexture), m_color(color), m_index(index) {};
+        : m_pTexture(pTexture), m_color(color), m_index(index), m_type(Chess::Piece::kInvalid){};
     virtual void Move() = 0;
     virtual void Render(SDL_Renderer* pRenderer) = 0;
     virtual std::vector<unsigned int> GetAvailableMoves() = 0;

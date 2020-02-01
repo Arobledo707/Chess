@@ -15,8 +15,8 @@ namespace Chess
 
     enum class Color : char 
     {
-        kWhite = 1,
-        kBlack = 2,
+        kWhite = 'W',
+        kBlack = 'B',
     };
 
     enum class Piece : char 

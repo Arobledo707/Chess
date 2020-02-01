@@ -68,6 +68,9 @@
     <ClCompile Include="Chess\Factory\PieceFactory.cpp">
       <Filter>Chess\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="SDLTextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -118,5 +121,6 @@
     <ClInclude Include="Chess\Factory\PieceFactory.h">
       <Filter>Chess\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="SDLTextureManager.h" />
   </ItemGroup>
 </Project>

@@ -79,6 +79,7 @@ void Application::Run()
         SDL_Surface* surface = TTF_RenderText_Solid(Sans, "P", col);
         SDL_Texture* texture = SDL_CreateTextureFromSurface(m_pRenderer.get(), surface);
         SDL_Rect textRect;
+        //SDL_FreeSurface();
         textRect.x = 0;
         textRect.y = 75;
         textRect.h = 75;

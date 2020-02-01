@@ -167,6 +167,7 @@
     <ClCompile Include="Chess\Square.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SDLTextManager.cpp" />
+    <ClCompile Include="SDLTextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Interfaces\Board.h" />
     <ClInclude Include="Interfaces\Piece.h" />
     <ClInclude Include="SDLTextManager.h" />
+    <ClInclude Include="SDLTextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
