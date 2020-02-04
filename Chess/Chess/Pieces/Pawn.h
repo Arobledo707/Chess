@@ -4,7 +4,7 @@
 class Pawn : public Piece
 {
 public:
-    Pawn(std::shared_ptr<SDL_Texture> pTexture, Chess::Color color, unsigned int index);
+    Pawn(SDL_Texture* pTexture, Chess::Color color, unsigned int index);
     // Inherited via Piece
     virtual void Move() override;
     virtual void Render(SDL_Renderer* pRenderer) override;

@@ -19,11 +19,11 @@ public:
     
     void Render(SDL_Renderer* pRenderer) const;
     void SetColor(Color color);
-    void SetPiece(std::shared_ptr<Piece> piece);
+    void SetPiece(Piece* piece);
 
 private:
     Color m_color;
-    std::shared_ptr<Piece> m_pPiece;
+    Piece* m_pPiece;
     std::pair<char, int> m_Id;
     SDL_Rect m_rect; 
 };

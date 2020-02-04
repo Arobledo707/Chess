@@ -41,7 +41,7 @@ void Square::SetColor(Color color)
     m_color = color;
 }
 
-void Square::SetPiece(std::shared_ptr<Piece> piece)
+void Square::SetPiece(Piece* piece)
 {
     m_pPiece = piece;
 }

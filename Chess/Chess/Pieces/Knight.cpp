@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-Knight::Knight(std::shared_ptr<SDL_Texture> pTexture, Chess::Color color, unsigned int index)
+Knight::Knight(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
     :Piece(pTexture, color, index)
 {
 }

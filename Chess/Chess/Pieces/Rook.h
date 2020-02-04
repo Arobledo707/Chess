@@ -3,7 +3,7 @@
 class Rook : public Piece
 {
 public:
-    Rook(std::shared_ptr<SDL_Texture> pTexture, Chess::Color color, unsigned int index);
+    Rook(SDL_Texture* pTexture, Chess::Color color, unsigned int index);
     // Inherited via Piece
     virtual void Move() override;
     virtual void Render(SDL_Renderer* pRenderer) override;

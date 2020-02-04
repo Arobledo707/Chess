@@ -48,26 +48,24 @@ bool ChessGameState::CheckColumns(int column)
     return false;
 }
 
-std::shared_ptr<Piece> ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
+std::unique_ptr<Piece> ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
 {
     return m_pieceFactory.get()->ReturnPiece<Pawn>(m_textureManager.GetTexture(Chess::Piece::kPawn, color), color, index);
-    //m_pieceFactory.get()->ReturnChessPiece<Chess::Piece::kPawn, Piece>(nullptr, color, index);
 }   
 
-std::shared_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
+std::unique_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
 {
-    std::shared_ptr<Piece> piece;
+    std::unique_ptr<Piece> piece;
     if (column == Chess::kBlackPawnColumn) 
     {
-        piece = SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row);
+        piece.reset(SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row).get());
     }
 
     else if(column == Chess::kWhitePawnColumn) 
     {
-        piece = SpawnPawn(Chess::Color::kWhite, (column * Chess::kBoardWidth) + row);
+        piece.reset(SpawnPawn(Chess::Color::kWhite, (column * Chess::kBoardWidth) + row).get());
 
     }
-
     else if (column == Chess::kBlackPieceColumnn) 
     {
 
@@ -88,14 +86,14 @@ void ChessGameState::SpawnPawns()
     for (unsigned int i = (Chess::kWhitePawnColumn * Chess::kBoardWidth); i < whitePawnIndexEnd; ++i) 
     {        
         m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kWhite, i));
-        m_squares[i].SetPiece(m_pieces.back());
+        m_squares[i].SetPiece(m_pieces.back().get());
     }
 
     unsigned int blackPawnIndexEnd = (Chess::kBlackPawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kBlackPawnColumn * Chess::kBoardWidth); i < blackPawnIndexEnd; ++i)
     {
         m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kBlack, i));
-        m_squares[i].SetPiece(m_pieces.back());
+        m_squares[i].SetPiece(m_pieces.back().get());
     }
 
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
