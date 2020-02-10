@@ -340,5 +340,7 @@ ASALocalRun/
 healthchecksdb
 
 #except these
-!/ThirdParty/SDL2-2.0.10/lib/x64/*
-!/ThirdParty/SDL2-2.0.10/lib/x86/*
+!SDL2.dll
+!SDL2.lib
+!SDL2main.lib
+!SDL2test.lib
