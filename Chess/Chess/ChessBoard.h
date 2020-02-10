@@ -19,8 +19,14 @@ public:
     virtual int CheckForGameEnd() const override;
     virtual int PrintGameEnd() override;
     virtual void Render(SDL_Renderer* pRenderer) override;
+
+private:
+    void SpawnPieces();
+    void SpawnPawns();
 private:
     ChessGameState m_currentState;
     SDLTextureManager m_textureManager;
+    std::unique_ptr<PieceFactory> m_pieceFactory;
+
 };
 

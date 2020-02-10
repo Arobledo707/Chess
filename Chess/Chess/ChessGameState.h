@@ -14,6 +14,7 @@ public:
     void SpawnPieces(const SDLTextureManager& textureManager);
     void ResetBoard();
     void Render(SDL_Renderer* pRenderer);
+    void AddPiece(std::unique_ptr<Piece> piece, unsigned int i);
 private:
     bool CheckColumns(int column);
     //std::unique_ptr<Piece> SpawnPawn(Chess::Color color, unsigned int index);

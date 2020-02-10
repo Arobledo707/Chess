@@ -19,7 +19,7 @@ ChessGameState::ChessGameState()
 
 void ChessGameState::SpawnPieces(const SDLTextureManager& textureManager)
 {
-    SpawnPawns(textureManager);
+    //SpawnPawns(textureManager);
 }
 
 void ChessGameState::Render(SDL_Renderer* pRenderer)
@@ -28,7 +28,6 @@ void ChessGameState::Render(SDL_Renderer* pRenderer)
     //if (!texturesCreated) 
     //{
     //    m_textureManager.CreateTextures(pRenderer);
-    //    texturesCreated = true;
     //}
 
     for (const Square& square: m_squares) 
@@ -37,6 +36,13 @@ void ChessGameState::Render(SDL_Renderer* pRenderer)
     }
 
 }
+
+void ChessGameState::AddPiece(std::unique_ptr<Piece> piece, unsigned int i)
+{
+    m_pieces.push_back(std::move(piece));
+    m_squares[i].SetPiece(m_pieces.back().get());
+}
+
 
 bool ChessGameState::CheckColumns(int column)
 {
@@ -85,15 +91,15 @@ void ChessGameState::SpawnPawns(const SDLTextureManager& textureManager)
     unsigned int whitePawnIndexEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kWhitePawnColumn * Chess::kBoardWidth); i < whitePawnIndexEnd; ++i) 
     {        
-        m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kWhite, i));
-        m_squares[i].SetPiece(m_pieces.back().get());
+       // m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kWhite, i));
+        //m_squares[i].SetPiece(m_pieces.back().get());
     }
 
     unsigned int blackPawnIndexEnd = (Chess::kBlackPawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kBlackPawnColumn * Chess::kBoardWidth); i < blackPawnIndexEnd; ++i)
     {
-        m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kBlack, i));
-        m_squares[i].SetPiece(m_pieces.back().get());
+        //m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kBlack, i));
+        //m_squares[i].SetPiece(m_pieces.back().get());
     }
 
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
