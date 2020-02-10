@@ -17,19 +17,19 @@ ChessGameState::ChessGameState()
     ResetBoard();
 }
 
-void ChessGameState::SpawnPieces()
+void ChessGameState::SpawnPieces(const SDLTextureManager& textureManager)
 {
-    SpawnPawns();
+    SpawnPawns(textureManager);
 }
 
 void ChessGameState::Render(SDL_Renderer* pRenderer)
 {
-    static bool texturesCreated = false; 
-    if (!texturesCreated) 
-    {
-        m_textureManager.CreateTextures(pRenderer);
-        texturesCreated = true;
-    }
+    //static bool texturesCreated = false; 
+    //if (!texturesCreated) 
+    //{
+    //    m_textureManager.CreateTextures(pRenderer);
+    //    texturesCreated = true;
+    //}
 
     for (const Square& square: m_squares) 
     {
@@ -48,37 +48,37 @@ bool ChessGameState::CheckColumns(int column)
     return false;
 }
 
-std::unique_ptr<Piece> ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
+/*std::unique_ptr<Piece> ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
 {
     return m_pieceFactory.get()->ReturnPiece<Pawn>(m_textureManager.GetTexture(Chess::Piece::kPawn, color), color, index);
-}   
+} */  
 
-std::unique_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
-{
-    std::unique_ptr<Piece> piece;
-    if (column == Chess::kBlackPawnColumn) 
-    {
-        piece.reset(SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row).get());
-    }
+//std::unique_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
+//{
+//    std::unique_ptr<Piece> piece;
+//    if (column == Chess::kBlackPawnColumn) 
+//    {
+//        piece.reset(SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row).get());
+//    }
+//
+//    else if(column == Chess::kWhitePawnColumn) 
+//    {
+//        piece.reset(SpawnPawn(Chess::Color::kWhite, (column * Chess::kBoardWidth) + row).get());
+//
+//    }
+//    else if (column == Chess::kBlackPieceColumnn) 
+//    {
+//
+//    }
+//    else if (column == Chess::kWhitePieceColumn) 
+//    {
+//
+//    }
+//
+//    return piece;
+//}
 
-    else if(column == Chess::kWhitePawnColumn) 
-    {
-        piece.reset(SpawnPawn(Chess::Color::kWhite, (column * Chess::kBoardWidth) + row).get());
-
-    }
-    else if (column == Chess::kBlackPieceColumnn) 
-    {
-
-    }
-    else if (column == Chess::kWhitePieceColumn) 
-    {
-
-    }
-
-    return piece;
-}
-
-void ChessGameState::SpawnPawns()
+void ChessGameState::SpawnPawns(const SDLTextureManager& textureManager)
 {
     //TODO interate through half and instantiate 2 pawns at once?
     //spawn white pawns

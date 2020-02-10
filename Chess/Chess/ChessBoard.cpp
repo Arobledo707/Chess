@@ -1,6 +1,10 @@
 #include "ChessBoard.h"
 #include <SDL.h>
 
+ChessBoard::ChessBoard()
+{
+}
+
 void ChessBoard::StartGame()
 {
    m_currentState.ResetBoard();
@@ -34,4 +38,9 @@ int ChessBoard::PrintGameEnd()
 void ChessBoard::Render(SDL_Renderer* pRenderer)
 {
     m_currentState.Render(pRenderer);
+}
+
+void ChessBoard::Initialize(SDL_Renderer* pRenderer)
+{
+    m_textureManager.CreateTextures(pRenderer);
 }

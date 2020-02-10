@@ -7,6 +7,7 @@ class Board
 public:
     virtual ~Board() = default;
 
+    virtual void Initialize(SDL_Renderer* pRenderer) = 0;
     virtual void StartGame() = 0;
     virtual const int GetCurrentPlayer() const = 0;
     virtual const int GetAvailableMoves() const = 0;

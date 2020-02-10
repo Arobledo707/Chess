@@ -1,7 +1,7 @@
 #pragma once
 
 //#include <SDL.h>
-//#include <SDL_ttf.h>
+#include <SDL_ttf.h>
 #include <SDL.h>
 
 #include <memory>
@@ -11,6 +11,7 @@
 
 struct SDL_Texture;
 struct SDL_Renderer;
+
 class SDLTextureManager
 
 {
@@ -20,7 +21,8 @@ public:
     bool CreateTextures(SDL_Renderer* pRenderer);
 
     SDL_Texture* GetTexture(Chess::Piece piece, Chess::Color color);
-
+private:
+    void CreateTexture(TTF_Font* pFont, Chess::Piece piece, char color, SDL_Renderer* pRenderer);
 private:
     std::unordered_map<char, SDL_Texture*> m_textures;
     static constexpr SDL_Color kBlack{ (Uint8)10, (Uint8)10, (Uint8)10, (Uint8)0 };
