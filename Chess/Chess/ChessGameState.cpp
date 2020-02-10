@@ -25,11 +25,11 @@ void ChessGameState::SpawnPieces()
 void ChessGameState::Render(SDL_Renderer* pRenderer)
 {
     static bool texturesCreated = false; 
-    if (!texturesCreated) 
-    {
-        m_textureManager.CreateTextures(pRenderer);
-        texturesCreated = true;
-    }
+    //if (!texturesCreated) 
+    //{
+    //    m_textureManager.CreateTextures(pRenderer);
+    //    texturesCreated = true;
+    //}
 
     for (const Square& square: m_squares) 
     {
