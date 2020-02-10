@@ -43,7 +43,7 @@ void Application::Run()
     assert(m_pWindow.get());
     assert(m_pBoard.get());
 
-    m_pBoard->StartGame();
+    m_pBoard->Initialize(m_pRenderer.get());
 
     bool running = true;
     SDL_Event event;
@@ -51,6 +51,9 @@ void Application::Run()
 
     unsigned long long currentTick = SDL_GetPerformanceCounter();
     unsigned long long lastTick = 0;
+
+    m_pBoard->StartGame();
+
     while (running) 
     {
         lastTick = currentTick;
