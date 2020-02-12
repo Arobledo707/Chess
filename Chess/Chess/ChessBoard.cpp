@@ -55,9 +55,6 @@ void ChessBoard::SpawnPawns()
     {
         m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Pawn>
             (m_textureManager.GetTexture(Chess::Piece::kPawn, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
-
-        //m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kWhite, i));
-        //m_squares[i].SetPiece(m_pieces.back().get());
     }
 
     unsigned int blackPawnIndexEnd = (Chess::kBlackPawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
@@ -65,8 +62,6 @@ void ChessBoard::SpawnPawns()
     {
         m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Pawn>
             (m_textureManager.GetTexture(Chess::Piece::kPawn, Chess::Color::kBlack), Chess::Color::kBlack, i), i);
-        //m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kBlack, i));
-        //m_squares[i].SetPiece(m_pieces.back().get());
     }
 
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;

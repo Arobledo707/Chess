@@ -28,8 +28,8 @@ void SDLTextureManager::CreateTexture(TTF_Font* pFont, Chess::Piece piece, char 
     {
         sdlColor = kWhite;
     }
-    char pieceRef = (char)piece;
-    SDL_Surface* pSurface = TTF_RenderText_Solid(pFont, &pieceRef, sdlColor);
+    char pieceArray[2] = {(char)piece, '\0'};
+    SDL_Surface* pSurface = TTF_RenderText_Solid(pFont, pieceArray, sdlColor);
     SDL_Texture* pTex = SDL_CreateTextureFromSurface(pRenderer, pSurface);
     m_textures.emplace((char)piece + color, pTex);
     SDL_FreeSurface(pSurface);
