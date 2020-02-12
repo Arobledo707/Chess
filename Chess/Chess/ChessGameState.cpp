@@ -44,45 +44,6 @@ void ChessGameState::AddPiece(std::unique_ptr<Piece> piece, unsigned int i)
 }
 
 
-bool ChessGameState::CheckColumns(int column)
-{
-    if (column == Chess::kBlackPawnColumn || column == Chess::kWhitePawnColumn
-        || column == Chess::kBlackPieceColumnn || column ==Chess::kWhitePieceColumn) 
-    {
-        return true;
-    }
-    return false;
-}
-
-/*std::unique_ptr<Piece> ChessGameState::SpawnPawn(Chess::Color color, unsigned int index)
-{
-    return m_pieceFactory.get()->ReturnPiece<Pawn>(m_textureManager.GetTexture(Chess::Piece::kPawn, color), color, index);
-} */  
-
-//std::unique_ptr<Piece> ChessGameState::SpawnPiece(int column, int row)
-//{
-//    std::unique_ptr<Piece> piece;
-//    if (column == Chess::kBlackPawnColumn) 
-//    {
-//        piece.reset(SpawnPawn(Chess::Color::kBlack, (column * Chess::kBoardWidth) + row).get());
-//    }
-//
-//    else if(column == Chess::kWhitePawnColumn) 
-//    {
-//        piece.reset(SpawnPawn(Chess::Color::kWhite, (column * Chess::kBoardWidth) + row).get());
-//
-//    }
-//    else if (column == Chess::kBlackPieceColumnn) 
-//    {
-//
-//    }
-//    else if (column == Chess::kWhitePieceColumn) 
-//    {
-//
-//    }
-//
-//    return piece;
-//}
 
 void ChessGameState::SpawnPawns(const SDLTextureManager& textureManager)
 {

@@ -6,6 +6,8 @@
 #include "../SDLTextureManager.h"
 #include <memory>
 #include <vector>
+
+//TODO call delete
 struct SDL_Renderer;
 class ChessGameState
 {
@@ -16,7 +18,6 @@ public:
     void Render(SDL_Renderer* pRenderer);
     void AddPiece(std::unique_ptr<Piece> piece, unsigned int i);
 private:
-    bool CheckColumns(int column);
     std::unique_ptr<Piece> SpawnPiece(int column, int row);
     void SpawnPawns(const SDLTextureManager& textureManager);
 

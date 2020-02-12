@@ -1,12 +1,14 @@
 #include "Bishop.h"
 
+Bishop::Bishop(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
+    :Piece(pTexture, color, index)
+{
+}
+
 void Bishop::Move()
 {
 }
 
-void Bishop::Render(SDL_Renderer* pRenderer)
-{
-}
 
 std::vector<unsigned int> Bishop::GetAvailableMoves()
 {

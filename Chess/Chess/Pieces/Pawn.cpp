@@ -10,10 +10,6 @@ void Pawn::Move()
 {
 }
 
-void Pawn::Render(SDL_Renderer* pRenderer)
-{
-    SDL_RenderCopy(pRenderer, GetTexture(), NULL, &GetRect());
-}
 
 std::vector<unsigned int> Pawn::GetAvailableMoves()
 {

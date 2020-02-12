@@ -1,12 +1,14 @@
 #include "King.h"
 
+King::King(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
+    :Piece(pTexture, color, index)
+{
+}
+
 void King::Move()
 {
 }
 
-void King::Render(SDL_Renderer* pRenderer)
-{
-}
 
 std::vector<unsigned int> King::GetAvailableMoves()
 {

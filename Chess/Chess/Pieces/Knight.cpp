@@ -9,10 +9,6 @@ void Knight::Move()
 {
 }
 
-void Knight::Render(SDL_Renderer* pRenderer)
-{
-}
-
 std::vector<unsigned int> Knight::GetAvailableMoves()
 {
     return std::vector<unsigned int>();

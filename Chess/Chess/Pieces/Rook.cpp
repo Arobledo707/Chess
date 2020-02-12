@@ -9,9 +9,6 @@ void Rook::Move()
 {
 }
 
-void Rook::Render(SDL_Renderer* pRenderer)
-{
-}
 
 std::vector<unsigned int> Rook::GetAvailableMoves()
 {

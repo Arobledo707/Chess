@@ -4,7 +4,6 @@
 
 struct SDL_Renderer;
 struct SDL_Window;
-struct Board;
 
 class Application
 {

@@ -14,7 +14,7 @@ public:
         m_rect.y = (index / Chess::kBoardWidth) * Chess::kSquareWidth;
     };
     virtual void Move() = 0;
-    virtual void Render(SDL_Renderer* pRenderer) = 0;
+    void Render(SDL_Renderer* pRenderer) { SDL_RenderCopy(pRenderer, GetTexture(), NULL, &GetRect()); }
     virtual std::vector<unsigned int> GetAvailableMoves() = 0;
     const Chess::Color GetColor() { return m_color; }
     SDL_Texture* GetTexture() const { return m_pTexture; }

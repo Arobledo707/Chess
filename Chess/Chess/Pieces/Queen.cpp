@@ -1,12 +1,14 @@
 #include "Queen.h"
 
+Queen::Queen(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
+    :Piece(pTexture, color, index)
+{
+}
+
 void Queen::Move()
 {
 }
 
-void Queen::Render(SDL_Renderer* pRenderer)
-{
-}
 
 std::vector<unsigned int> Queen::GetAvailableMoves()
 {

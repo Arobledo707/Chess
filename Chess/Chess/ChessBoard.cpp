@@ -44,6 +44,40 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
 void ChessBoard::SpawnPieces()
 {
     SpawnPawns();
+
+    for (int i = 0; i < Chess::kBoardWidth/2; ++i) 
+    {
+        switch (i)
+        {
+        case 0:
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Rook>
+                (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
+
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Rook>
+                (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth-1) - i), (Chess::kBoardWidth - 1) - i);
+            break;
+        case 1:
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Knight>
+                (m_textureManager.GetTexture(Chess::Piece::kKnight, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
+
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Knight>
+                (m_textureManager.GetTexture(Chess::Piece::kKnight, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
+            break;
+        case 2:
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Bishop>
+                (m_textureManager.GetTexture(Chess::Piece::kBishop, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
+
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Bishop>
+                (m_textureManager.GetTexture(Chess::Piece::kBishop, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
+            break;
+        case 3:
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<King>
+                (m_textureManager.GetTexture(Chess::Piece::kKing, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
+
+            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Queen>
+                (m_textureManager.GetTexture(Chess::Piece::kQueen, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
+        }
+    }
 }
 
 void ChessBoard::SpawnPawns()
