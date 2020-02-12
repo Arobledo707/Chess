@@ -17,7 +17,6 @@ public:
     void AddPiece(std::unique_ptr<Piece> piece, unsigned int i);
 private:
     bool CheckColumns(int column);
-    //std::unique_ptr<Piece> SpawnPawn(Chess::Color color, unsigned int index);
     std::unique_ptr<Piece> SpawnPiece(int column, int row);
     void SpawnPawns(const SDLTextureManager& textureManager);
 

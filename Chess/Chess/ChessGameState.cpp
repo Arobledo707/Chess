@@ -35,6 +35,11 @@ void ChessGameState::Render(SDL_Renderer* pRenderer)
         square.Render(pRenderer);
     }
 
+    for (const auto& piece: m_pieces) 
+    {
+        piece.get()->Render(pRenderer);
+    }
+
 }
 
 void ChessGameState::AddPiece(std::unique_ptr<Piece> piece, unsigned int i)
