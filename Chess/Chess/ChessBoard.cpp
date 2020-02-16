@@ -79,11 +79,11 @@ void ChessBoard::SpawnPieces()
         }
     }
 
+    int maxIndex = Chess::kBoardWidth * Chess::kBoardWidth - 1;
 
     for (int j = 0; j < Chess::kBoardWidth / 2; ++j)
     {
-        int i = (Chess::kBoardWidth * Chess::kWhitePieceRow) + j;
-        int maxIndex = Chess::kBoardWidth * Chess::kBoardWidth - 1;
+        int i = (Chess::kBoardWidth * Chess::kBlackPieceRow) + j;
         switch (i)
         {
         case 56:
