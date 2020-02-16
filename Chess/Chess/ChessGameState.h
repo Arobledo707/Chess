@@ -17,6 +17,7 @@ public:
     void ResetBoard();
     void Render(SDL_Renderer* pRenderer);
     void AddPiece(std::unique_ptr<Piece> piece, unsigned int i);
+    Square& GetSquare(unsigned int index);
 private:
     std::unique_ptr<Piece> SpawnPiece(int column, int row);
     void SpawnPawns(const SDLTextureManager& textureManager);
@@ -26,4 +27,3 @@ private:
     std::vector<std::unique_ptr<Piece>> m_pieces;
     std::unique_ptr<PieceFactory> m_pieceFactory;
 };
-

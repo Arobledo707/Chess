@@ -27,6 +27,10 @@ private:
     ChessGameState m_currentState;
     SDLTextureManager m_textureManager;
     std::unique_ptr<PieceFactory> m_pieceFactory;
+    Piece* m_selectedPiece;
+
+    // Inherited via Board
+    virtual const bool GetClick() override;
 
 };
 

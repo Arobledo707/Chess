@@ -9,7 +9,7 @@ void Knight::Move()
 {
 }
 
-std::vector<unsigned int> Knight::GetAvailableMoves()
+std::vector<unsigned int> Knight::GetAvailableMoves(ChessGameState* pGameState)
 {
     return std::vector<unsigned int>();
 }

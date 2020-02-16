@@ -12,6 +12,8 @@ namespace Chess
     static constexpr unsigned int kWhitePawnColumn = 1;
     static constexpr unsigned int kWhitePieceRow = 0;
     static constexpr unsigned int kBlackPieceRow = 7;
+    static constexpr unsigned int kChessLeftSideRemainder = 0;
+    static constexpr unsigned int kChessRightSideRemainder = 7;
 
     enum class Color : char 
     {

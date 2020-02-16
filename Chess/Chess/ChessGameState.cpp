@@ -43,6 +43,11 @@ void ChessGameState::AddPiece(std::unique_ptr<Piece> piece, unsigned int i)
     m_squares[i].SetPiece(m_pieces.back().get());
 }
 
+Square& ChessGameState::GetSquare(unsigned int index)
+{
+    return m_squares[index];
+}
+
 
 
 void ChessGameState::SpawnPawns(const SDLTextureManager& textureManager)

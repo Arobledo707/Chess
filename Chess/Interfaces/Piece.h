@@ -4,6 +4,8 @@
 #include <SDL.h>
 #include "../Constants/ChessConstants.h"
 
+struct ChessGameState;
+
 class Piece
 {
 public:
@@ -15,17 +17,18 @@ public:
     };
     virtual void Move() = 0;
     void Render(SDL_Renderer* pRenderer) { SDL_RenderCopy(pRenderer, GetTexture(), NULL, &GetRect()); }
-    virtual std::vector<unsigned int> GetAvailableMoves() = 0;
+    virtual std::vector<unsigned int> GetAvailableMoves(ChessGameState* pGameState) = 0;
     const Chess::Color GetColor() { return m_color; }
     SDL_Texture* GetTexture() const { return m_pTexture; }
 
 protected:
     void SetPosition(unsigned int x, unsigned int y) { m_rect.x = x; m_rect.y = y; };
     SDL_Rect GetRect() const { return m_rect; }
+    unsigned int m_index;
+
 private:
     const Chess::Color m_color;
     SDL_Texture* m_pTexture;
-    unsigned int m_index;
     Chess::Piece m_type;
     SDL_Rect m_rect { 0, 0, Chess::kSquareWidth, Chess::kSquareWidth};
 };

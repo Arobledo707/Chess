@@ -10,7 +10,7 @@ void Rook::Move()
 }
 
 
-std::vector<unsigned int> Rook::GetAvailableMoves()
+std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
 {
     return std::vector<unsigned int>();
 }

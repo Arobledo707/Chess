@@ -66,6 +66,10 @@ void Application::Run()
             {
             case SDL_QUIT:
                 running = false;
+
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                m_pBoard.get()->GetClick();
                 break;
             default:
                 break;
@@ -77,20 +81,9 @@ void Application::Run()
 
         m_pBoard.get()->Render(m_pRenderer.get()); 
         
-        //TTF_Font* Sans = TTF_OpenFont(kArialFilePath, kFontSize);
-        //SDL_Color col = { 10, 10, 10, 0 };
-        //SDL_Surface* surface = TTF_RenderText_Solid(Sans, "P", col);
-        //SDL_Texture* texture = SDL_CreateTextureFromSurface(m_pRenderer.get(), surface);
-        //SDL_Rect textRect;
-        ////SDL_FreeSurface();
-        //textRect.x = 0;
-        //textRect.y = 75;
-        //textRect.h = 75;
-        //textRect.w = 75;
-        //TTF_CloseFont(Sans);
-        //SDL_RenderCopy(m_pRenderer.get(), texture, NULL, &textRect);
 
         SDL_RenderPresent(m_pRenderer.get());
+        //SDL_RendererFlip
     }
 
     CleanUp();

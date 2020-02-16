@@ -45,6 +45,8 @@ void ChessBoard::SpawnPieces()
 {
     SpawnPawns();
 
+    //TODO refactor into a function
+
     for (int i = 0; i < Chess::kBoardWidth/2; ++i) 
     {
         switch (i)
@@ -136,6 +138,27 @@ void ChessBoard::SpawnPawns()
     }
 
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
+}
+
+const bool ChessBoard::GetClick()
+{
+    int x = 0;
+    int y = 0;
+    SDL_GetMouseState(&x, &y);
+    int column = x / Chess::kSquareWidth;
+    int row = y / Chess::kSquareWidth;
+
+    if (m_selectedPiece == nullptr)
+    {
+        m_selectedPiece = m_currentState.GetSquare((y * Chess::kBoardWidth) + x).GetPiece();
+        std::vector<unsigned int> moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
+    }
+    else 
+    {
+        m_selectedPiece->Move();
+    }
+    
+    return false;
 }
 
 void ChessBoard::Initialize(SDL_Renderer* pRenderer)

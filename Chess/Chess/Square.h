@@ -20,6 +20,7 @@ public:
     void Render(SDL_Renderer* pRenderer) const;
     void SetColor(Color color);
     void SetPiece(Piece* piece);
+    Piece* GetPiece() { return m_pPiece; }
 
 private:
     Color m_color;

@@ -10,7 +10,7 @@ void Queen::Move()
 }
 
 
-std::vector<unsigned int> Queen::GetAvailableMoves()
+std::vector<unsigned int> Queen::GetAvailableMoves(ChessGameState* pGameState)
 {
     return std::vector<unsigned int>();
 }

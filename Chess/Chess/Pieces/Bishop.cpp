@@ -10,7 +10,7 @@ void Bishop::Move()
 }
 
 
-std::vector<unsigned int> Bishop::GetAvailableMoves()
+std::vector<unsigned int> Bishop::GetAvailableMoves(ChessGameState* pGameState)
 {
     return std::vector<unsigned int>();
 }
