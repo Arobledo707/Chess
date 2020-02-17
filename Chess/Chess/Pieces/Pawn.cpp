@@ -24,7 +24,7 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
         moves.push_back(m_index + (Chess::kBoardWidth * 2));
     }
 
-    if (!(m_index < Chess::kBoardWidth) || !(m_index > (Chess::kBoardWidth * Chess::kBoardWidth) - Chess::kBoardWidth)) 
+    if (!(m_index < Chess::kBoardWidth) || !(m_index > ((Chess::kBoardWidth * Chess::kBoardWidth) - 1) - Chess::kBoardWidth)) 
     {
         if (pGameState->GetSquare(m_index + Chess::kBoardWidth).GetPiece() == nullptr)
         {
