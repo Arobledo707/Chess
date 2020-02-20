@@ -31,6 +31,9 @@ namespace Chess
         kKing = 'K',
         kInvalid = 'I'
     };
+
+    static bool IsValidIndex(int index) {return index >= 0 && index <= (Chess::kBoardSize - 1);
+    }
 };
 
 
