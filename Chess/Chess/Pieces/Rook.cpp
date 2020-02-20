@@ -15,7 +15,7 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
 {
     assert(Chess::IsValidIndex(m_index));
 
-    std::vector<unsigned int> moves;
+    std::vector<unsigned int> moves{};
 
     //horizontal moves
     int remainder = m_index % Chess::kBoardWidth;
@@ -43,11 +43,9 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
             {
                 pSquare = nullptr;
             }
-
         }
 
     }
-
 
     // if the remainder isn't 7 then we can move right
     if (remainder != Chess::kRightSideRemainder)
@@ -73,7 +71,6 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
             {
                 pSquare = nullptr;
             }
-
         }
     }
 
@@ -102,7 +99,6 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
             {
                 pSquare = nullptr;
             }
-
         }
     }
 
