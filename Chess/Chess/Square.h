@@ -21,6 +21,7 @@ public:
     void SetColor(Color color);
     void SetPiece(Piece* piece);
     Piece* GetPiece() { return m_pPiece; }
+    const SDL_Rect& GetRect() { return m_rect; };
 
 private:
     Color m_color;

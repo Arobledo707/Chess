@@ -5,7 +5,7 @@ Queen::Queen(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 {
 }
 
-void Queen::Move()
+void Queen::Move(unsigned int move)
 {
 }
 

@@ -165,6 +165,7 @@
     <ClCompile Include="Chess\Pieces\Queen.cpp" />
     <ClCompile Include="Chess\Pieces\Rook.cpp" />
     <ClCompile Include="Chess\Square.cpp" />
+    <ClCompile Include="Interfaces\Piece.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SDLTextManager.cpp" />
     <ClCompile Include="SDLTextureManager.cpp" />

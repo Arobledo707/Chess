@@ -48,29 +48,23 @@ Square& ChessGameState::GetSquare(unsigned int index)
     return m_squares[index];
 }
 
-
-
-void ChessGameState::SpawnPawns(const SDLTextureManager& textureManager)
+void ChessGameState::RemovePiece(Piece* pPiece)
 {
-    //TODO interate through half and instantiate 2 pawns at once?
-    //spawn white pawns
-    unsigned int whitePawnIndexEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
-    for (unsigned int i = (Chess::kWhitePawnColumn * Chess::kBoardWidth); i < whitePawnIndexEnd; ++i) 
-    {        
-       // m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kWhite, i));
-        //m_squares[i].SetPiece(m_pieces.back().get());
-    }
-
-    unsigned int blackPawnIndexEnd = (Chess::kBlackPawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
-    for (unsigned int i = (Chess::kBlackPawnColumn * Chess::kBoardWidth); i < blackPawnIndexEnd; ++i)
+    for (int i = 0; i < m_pieces.size(); ++i) 
     {
-        //m_pieces.push_back(m_pieceFactory.get()->ReturnPiece<Pawn>(nullptr, Chess::Color::kBlack, i));
-        //m_squares[i].SetPiece(m_pieces.back().get());
+        if (pPiece == m_pieces[i].get())
+        {
+            std::swap(m_pieces[i], m_pieces.back());
+            m_pieces.pop_back();
+            break;
+        }
     }
-
-    unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
-
 }
+
+void ChessGameState::AddPiece()
+{
+}
+
 
 void ChessGameState::ResetBoard()
 {

@@ -6,9 +6,6 @@ Knight::Knight(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 {
 }
 
-void Knight::Move()
-{
-}
 
 std::vector<unsigned int> Knight::GetAvailableMoves(ChessGameState* pGameState)
 {

@@ -5,7 +5,7 @@ King::King(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 {
 }
 
-void King::Move()
+void King::Move(unsigned int move)
 {
 }
 

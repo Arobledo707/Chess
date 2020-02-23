@@ -10,9 +10,10 @@ Pawn::Pawn(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
     }
 }
 
-void Pawn::Move()
+void Pawn::Move(unsigned int move)
 {
     m_hasMoved = true;
+    Piece::Move(move);
 }
 
 
@@ -23,8 +24,6 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
     {
         moves.push_back(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset));
     }
-    bool uno = !(m_index < Chess::kBoardWidth);
-    bool dos = !(m_index > ((Chess::kBoardSize) - 1) - Chess::kBoardWidth);
 
     if (!(m_index < Chess::kBoardWidth) || !(m_index > ((Chess::kBoardSize) - 1) - Chess::kBoardWidth)) 
     {

@@ -2,14 +2,14 @@
 #include <SDL.h>
 
 ChessBoard::ChessBoard()
+    : m_selectedPiece(nullptr)
 {
 }
 
 void ChessBoard::StartGame()
 {
-   m_currentState.ResetBoard();
-   //m_currentState.SpawnPieces();
-   SpawnPieces();
+    m_currentState.ResetBoard();
+    SpawnPieces();
 }
 
 const int ChessBoard::GetCurrentPlayer() const
@@ -22,8 +22,16 @@ const int ChessBoard::GetAvailableMoves() const
     return 0;
 }
 
-void ChessBoard::MakeMove()
+void ChessBoard::MakeMove(unsigned int move)
 {
+    Piece* pPiece = m_currentState.GetSquare(move).GetPiece();
+    if (pPiece) 
+    {
+        m_currentState.RemovePiece(pPiece);
+    }
+    m_selectedPiece->Move(move);
+    m_currentState.GetSquare(move).SetPiece(m_selectedPiece);
+    m_moves.clear();
 }
 
 int ChessBoard::CheckForGameEnd() const
@@ -39,9 +47,14 @@ int ChessBoard::PrintGameEnd()
 void ChessBoard::Render(SDL_Renderer* pRenderer)
 {
     m_currentState.Render(pRenderer);
-    if (m_selectedPiece)
+    if (!m_moves.empty())
     {
-        std::vector<unsigned int> moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
+        for (unsigned int move: m_moves)
+        {
+            SDL_SetRenderDrawBlendMode(pRenderer, SDL_BLENDMODE_BLEND);
+            SDL_SetRenderDrawColor(pRenderer, 150, 0, 150, 128);
+            SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move).GetRect());
+        }
     }
 }
 
@@ -51,7 +64,7 @@ void ChessBoard::SpawnPieces()
 
     //TODO refactor into a function
 
-    for (int i = 0; i < Chess::kBoardWidth/2; ++i) 
+    for (int i = 0; i < Chess::kBoardWidth / 2; ++i)
     {
         switch (i)
         {
@@ -60,7 +73,7 @@ void ChessBoard::SpawnPieces()
                 (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
 
             m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Rook>
-                (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth-1) - i), (Chess::kBoardWidth - 1) - i);
+                (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
             break;
         case 1:
             m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Knight>
@@ -152,19 +165,26 @@ const bool ChessBoard::OnClick()
     int column = x / Chess::kSquareWidth;
     int row = y / Chess::kSquareWidth;
 
-    if (m_selectedPiece == nullptr)
+    int index = (row * Chess::kBoardWidth) + column;
+
+    if (m_selectedPiece)
     {
-        m_selectedPiece = m_currentState.GetSquare((row * Chess::kBoardWidth) + column).GetPiece();
-        if (m_selectedPiece)
+        for (int i = 0; i < m_moves.size(); ++i)
         {
-            std::vector<unsigned int> moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
+            if (index == m_moves[i])
+            {
+                MakeMove(index);
+                return true;
+            }
         }
     }
-    else 
+
+    m_selectedPiece = m_currentState.GetSquare(index).GetPiece();
+    if (m_selectedPiece)
     {
-        m_selectedPiece->Move();
+        m_moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
     }
-    
+
     return false;
 }
 

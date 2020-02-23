@@ -76,14 +76,11 @@ void Application::Run()
             }
         }
 
-        SDL_SetRenderDrawColor(m_pRenderer.get(), 150, 150, 150, 0);
+        SDL_SetRenderDrawColor(m_pRenderer.get(), 150, 150, 150, 255);
         SDL_RenderClear(m_pRenderer.get());
-
         m_pBoard.get()->Render(m_pRenderer.get()); 
         
-
         SDL_RenderPresent(m_pRenderer.get());
-        //SDL_RendererFlip
     }
 
     CleanUp();

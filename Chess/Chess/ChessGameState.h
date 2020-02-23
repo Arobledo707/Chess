@@ -18,9 +18,8 @@ public:
     void Render(SDL_Renderer* pRenderer);
     void AddPiece(std::unique_ptr<Piece> piece, unsigned int i);
     Square& GetSquare(unsigned int index);
-private:
-    std::unique_ptr<Piece> SpawnPiece(int column, int row);
-    void SpawnPawns(const SDLTextureManager& textureManager);
+    void RemovePiece(Piece* pPiece);
+    void AddPiece();
 
 private:
     Square m_squares[Chess::kBoardSize];

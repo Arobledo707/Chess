@@ -12,7 +12,7 @@ public:
     virtual const int GetCurrentPlayer() const = 0;
     virtual const int GetAvailableMoves() const = 0;
     virtual const bool OnClick() = 0;
-    virtual void MakeMove() = 0;
+    virtual void MakeMove(unsigned int move) = 0;
     virtual int CheckForGameEnd() const = 0;
     virtual int PrintGameEnd() = 0;
 

@@ -6,7 +6,7 @@ Bishop::Bishop(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 {
 }
 
-void Bishop::Move()
+void Bishop::Move(unsigned int move)
 {
 }
 

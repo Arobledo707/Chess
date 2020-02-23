@@ -26,11 +26,11 @@ void Square::Render(SDL_Renderer* pRenderer) const
 {
     if (m_color == Color::Black)
     {
-        SDL_SetRenderDrawColor(pRenderer, 200, 200, 200, 100);
+        SDL_SetRenderDrawColor(pRenderer, 200, 200, 200, 255);
     }
     else 
     {
-        SDL_SetRenderDrawColor(pRenderer, 100, 100, 100, 10);
+        SDL_SetRenderDrawColor(pRenderer, 100, 100, 100, 255);
     }
     SDL_RenderFillRect(pRenderer, &m_rect);
 
