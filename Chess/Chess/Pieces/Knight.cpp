@@ -132,4 +132,5 @@ std::vector<unsigned int> Knight::GetAvailableMoves(ChessGameState* pGameState)
             }
         }
     }
+    return moves;
 }

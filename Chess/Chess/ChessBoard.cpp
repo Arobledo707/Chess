@@ -39,6 +39,10 @@ int ChessBoard::PrintGameEnd()
 void ChessBoard::Render(SDL_Renderer* pRenderer)
 {
     m_currentState.Render(pRenderer);
+    if (m_selectedPiece)
+    {
+        std::vector<unsigned int> moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
+    }
 }
 
 void ChessBoard::SpawnPieces()
@@ -140,7 +144,7 @@ void ChessBoard::SpawnPawns()
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
 }
 
-const bool ChessBoard::GetClick()
+const bool ChessBoard::OnClick()
 {
     int x = 0;
     int y = 0;
@@ -150,8 +154,11 @@ const bool ChessBoard::GetClick()
 
     if (m_selectedPiece == nullptr)
     {
-        m_selectedPiece = m_currentState.GetSquare((y * Chess::kBoardWidth) + x).GetPiece();
-        std::vector<unsigned int> moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
+        m_selectedPiece = m_currentState.GetSquare((row * Chess::kBoardWidth) + column).GetPiece();
+        if (m_selectedPiece)
+        {
+            std::vector<unsigned int> moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
+        }
     }
     else 
     {

@@ -23,6 +23,13 @@ std::vector<unsigned int> Bishop::GetAvailableMoves(ChessGameState* pGameState)
     if (remainder != Chess::kLeftSideRemainder) 
     {
         // moving left and up
+        int currentIndex = (m_index - 1) - Chess::kBoardWidth;
+        while (Chess::IsValidIndex(currentIndex))
+        {
+
+        }
+
+
 
         // moving left and down
 

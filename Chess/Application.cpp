@@ -69,7 +69,7 @@ void Application::Run()
 
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                m_pBoard.get()->GetClick();
+                m_pBoard.get()->OnClick();
                 break;
             default:
                 break;

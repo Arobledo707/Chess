@@ -24,7 +24,7 @@ public:
 
 private:
     Color m_color;
-    Piece* m_pPiece;
+    Piece* m_pPiece = nullptr;
     std::pair<char, int> m_Id;
     SDL_Rect m_rect; 
 };

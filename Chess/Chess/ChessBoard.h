@@ -30,7 +30,7 @@ private:
     Piece* m_selectedPiece;
 
     // Inherited via Board
-    virtual const bool GetClick() override;
+    virtual const bool OnClick() override;
 
 };
 

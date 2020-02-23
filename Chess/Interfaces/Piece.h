@@ -9,8 +9,8 @@ struct ChessGameState;
 class Piece
 {
 public:
-    Piece(SDL_Texture* pTexture, Chess::Color color, unsigned int index) 
-        : m_pTexture(pTexture), m_color(color), m_index(index), m_type(Chess::Piece::kInvalid)
+    Piece(SDL_Texture* pTexture, Chess::Color color, unsigned int index, Chess::Piece type=Chess::Piece::kInvalid) 
+        : m_pTexture(pTexture), m_color(color), m_index(index), m_type(type)
     {
         m_rect.x = (index % Chess::kBoardWidth) * Chess::kSquareWidth;
         m_rect.y = (index / Chess::kBoardWidth) * Chess::kSquareWidth;
