@@ -20,6 +20,7 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
     std::vector<unsigned int> moves{};
 
     //horizontal moves
+    // if the remainder isnt 0 then we can move left
     int remainder = m_index % Chess::kBoardWidth;
     if (remainder != Chess::kLeftSideRemainder)
     {
@@ -44,78 +45,29 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
 
     }
 
-    // if the remainder isn't 0 then we can move left
-    //if (remainder != Chess::kLeftSideRemainder)
-    //{
-    //    unsigned int currentIndex = m_index - 1;
-    //    Square* pSquare = &pGameState->GetSquare(currentIndex);
-
-    //    while (pSquare) 
-    //    {
-    //        Piece* pPiece = pSquare->GetPiece();
-    //        if (pPiece == nullptr || pPiece->GetColor() != GetColor()) 
-    //        {
-    //            moves.push_back(currentIndex);
-    //        }
-    //        else 
-    //        {
-    //            break;
-    //        }
-
-    //        currentIndex -= 1;
-    //        int checkRemainder = currentIndex % Chess::kBoardWidth;
-    //        if (checkRemainder > Chess::kLeftSideRemainder)
-    //        {
-    //            pSquare = &pGameState->GetSquare(currentIndex);
-    //        }
-    //        else if(checkRemainder == Chess::kLeftSideRemainder) 
-    //        {
-    //            Piece* pPiece = pSquare->GetPiece();
-    //            if (pPiece == nullptr || pPiece->GetColor() != GetColor())
-    //            {
-    //                moves.push_back(currentIndex);
-    //            }
-    //            break;
-    //        }
-    //        else 
-    //        {
-    //            pSquare = nullptr;
-    //        }
-    //    }
-
-    //}
-
     // if the remainder isn't 7 then we can move right
+
     if (remainder != Chess::kRightSideRemainder)
     {
-        unsigned int currentIndex = m_index + 1;
-        Square* pSquare = &pGameState->GetSquare(currentIndex);
-
-        while (pSquare)
+        for (int i = 1; i < (Chess::kBoardWidth) - (remainder); ++i)
         {
-            Piece* pPiece = pSquare->GetPiece();
-            if (pPiece == nullptr || pPiece->GetColor() != GetColor())
+            int currentIndex = m_index + i;
+            Piece* pPiece = pGameState->GetSquare(currentIndex).GetPiece();
+            if (pPiece)
             {
-                moves.push_back(currentIndex);
+                if (pPiece->GetColor() == GetColor())
+                {
+                    break;
+                }
+                else
+                {
+                    moves.push_back(currentIndex);
+                    break;
+                }
             }
-            else
-            {
-                break;
-            }
-
-            currentIndex += 1;
-            int checkRemainder = currentIndex % Chess::kBoardWidth;
-            if (checkRemainder < Chess::kRightSideRemainder)
-            {
-                pSquare = &pGameState->GetSquare(currentIndex);
-            }
-            else
-            {
-                pSquare = nullptr;
-            }
+            moves.push_back(currentIndex);
         }
     }
-
 
     //vertical moves
 
