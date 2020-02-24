@@ -20,7 +20,9 @@ void Pawn::Move(unsigned int move)
 std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
 {
     std::vector<unsigned int> moves{};
-    if(m_hasMoved == false && pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)).GetPiece() == nullptr)
+    if(m_hasMoved == false && 
+        pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)).GetPiece() == nullptr &&
+        pGameState->GetSquare(m_index + ((Chess::kBoardWidth) * m_moveOffset)).GetPiece() == nullptr)
     {
         moves.push_back(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset));
     }

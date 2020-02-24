@@ -9,7 +9,7 @@ struct ChessGameState;
 class Piece
 {
 public:
-    Piece(SDL_Texture* pTexture, Chess::Color color, unsigned int index, Chess::Piece type=Chess::Piece::kInvalid) 
+    Piece(SDL_Texture* pTexture, Chess::Color color, unsigned int index, Chess::Piece type = Chess::Piece::kInvalid)
         : m_pTexture(pTexture), m_color(color), m_index(index), m_type(type)
     {
         m_rect.x = (index % Chess::kBoardWidth) * Chess::kSquareWidth;
@@ -20,6 +20,7 @@ public:
     virtual std::vector<unsigned int> GetAvailableMoves(ChessGameState* pGameState) = 0;
     const Chess::Color GetColor() { return m_color; }
     SDL_Texture* GetTexture() const { return m_pTexture; }
+    unsigned int GetIndex() const { return m_index; }
 
 protected:
     void SetPosition(unsigned int x, unsigned int y) { m_rect.x = x; m_rect.y = y; };

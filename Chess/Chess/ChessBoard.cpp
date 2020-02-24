@@ -29,8 +29,10 @@ void ChessBoard::MakeMove(unsigned int move)
     {
         m_currentState.RemovePiece(pPiece);
     }
+    m_currentState.GetSquare(m_selectedPiece->GetIndex()).SetPiece(nullptr);
     m_selectedPiece->Move(move);
-    m_currentState.GetSquare(move).SetPiece(m_selectedPiece);
+    Square* pSquare = &m_currentState.GetSquare(move);
+    pSquare->SetPiece(m_selectedPiece);
     m_moves.clear();
     m_selectedPiece = nullptr;
 }
@@ -178,6 +180,8 @@ const bool ChessBoard::OnClick()
                 return true;
             }
         }
+        m_selectedPiece = nullptr;
+        m_moves.clear();
     }
 
     m_selectedPiece = m_currentState.GetSquare(index).GetPiece();
