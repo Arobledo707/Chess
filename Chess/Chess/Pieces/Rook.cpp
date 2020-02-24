@@ -8,6 +8,8 @@ Rook::Rook(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 
 void Rook::Move(unsigned int move)
 {
+    m_hasMoved = true;
+    Piece::Move(move);
 }
 
 
@@ -104,7 +106,7 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
 
 
     // if rook isnt on bottom row then we can move down
-    if ((m_index > ((Chess::kBoardWidth * Chess::kBoardWidth)-1) - Chess::kBoardWidth))
+    if ((m_index < ((Chess::kBoardWidth * Chess::kBoardWidth)-1) - Chess::kBoardWidth))
     {
         unsigned int currentIndex = m_index += Chess::kBoardHeight;
         Square* pSquare = &pGameState->GetSquare(currentIndex);
