@@ -42,11 +42,9 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
             }
             moves.push_back(currentIndex);
         }
-
     }
 
     // if the remainder isn't 7 then we can move right
-
     if (remainder != Chess::kRightSideRemainder)
     {
         for (int i = 1; i < (Chess::kBoardWidth) - (remainder); ++i)
