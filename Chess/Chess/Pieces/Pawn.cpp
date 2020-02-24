@@ -26,8 +26,10 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
     {
         moves.push_back(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset));
     }
+    bool atTopRow = m_index < Chess::kBoardWidth;
+    bool atBottomRow = m_index > ((Chess::kBoardSize) - 1) - Chess::kBoardWidth;
 
-    if (!(m_index < Chess::kBoardWidth) || !(m_index > ((Chess::kBoardSize) - 1) - Chess::kBoardWidth)) 
+    if (!atTopRow || !atBottomRow)
     {
         if (pGameState->GetSquare(m_index + (Chess::kBoardWidth * m_moveOffset)).GetPiece() == nullptr)
         {
@@ -41,7 +43,7 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
         if (remainder != Chess::kRightSideRemainder)
         {
             if (pGameState->GetSquare(rightDiagonalIndex).GetPiece() != nullptr &&
-                pGameState->GetSquare(m_index + (Chess::kBoardWidth * m_moveOffset) + 1).GetPiece()->GetColor() != GetColor())
+                pGameState->GetSquare(rightDiagonalIndex).GetPiece()->GetColor() != GetColor())
             {
                 moves.push_back(rightDiagonalIndex);
             }
@@ -49,7 +51,7 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
         if (remainder != Chess::kLeftSideRemainder)
         {
             if (pGameState->GetSquare(leftDiagonalIndex).GetPiece() != nullptr &&
-                pGameState->GetSquare(m_index + (Chess::kBoardWidth * m_moveOffset) + 1).GetPiece()->GetColor() != GetColor())
+                pGameState->GetSquare(leftDiagonalIndex).GetPiece()->GetColor() != GetColor())
             {
                 moves.push_back(leftDiagonalIndex);
             }

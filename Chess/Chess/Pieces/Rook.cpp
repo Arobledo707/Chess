@@ -70,7 +70,7 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
     }
 
     //vertical moves
-
+    // if rook isnt on top row then we can move up
     if (m_index > Chess::kBoardWidth - 1)
     {
         int currentIndex = m_index - Chess::kBoardWidth;
@@ -96,73 +96,35 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
             }
             currentIndex -= Chess::kBoardWidth;
         }
-
     }
 
-    //vertical moves
-    // if rook isnt on top row then we can move up
-    //if (!(m_index < Chess::kBoardWidth))
-    //{
-    //    unsigned int currentIndex = m_index - Chess::kBoardHeight;
-    //    Square* pSquare = &pGameState->GetSquare(currentIndex);
-
-    //    while (pSquare)
-    //    {
-    //        Piece* pPiece = pSquare->GetPiece();
-    //        if (pPiece == nullptr || pPiece->GetColor() != GetColor())
-    //        {
-    //            moves.push_back(currentIndex);
-    //        }
-    //        else 
-    //        {
-    //            break;
-    //        }
-    //        currentIndex -= Chess::kBoardHeight;
-
-    //        if (currentIndex >= Chess::kBoardWidth)
-    //        {
-    //            pSquare = &pGameState->GetSquare(currentIndex);
-    //        }
-    //        else
-    //        {
-    //            pSquare = nullptr;
-    //        }
-    //    }
-    //}
-
-
     // if rook isnt on bottom row then we can move down
-    if ((m_index < ((Chess::kBoardSize) - 1) - Chess::kBoardWidth))
+    if ((m_index < ((Chess::kBoardSize) - 1) - Chess::kBoardWidth)) 
     {
-        unsigned int currentIndex = m_index + Chess::kBoardHeight;
-        Square* pSquare = &pGameState->GetSquare(currentIndex);
-
-        while (pSquare)
+        int currentIndex = m_index + Chess::kBoardWidth;
+        while (true)
         {
-            Piece* pPiece = pSquare->GetPiece();
-            if (pPiece == nullptr || pPiece->GetColor() != GetColor())
+            Piece* pPiece = pGameState->GetSquare(currentIndex).GetPiece();
+            if (pPiece)
             {
-                moves.push_back(currentIndex);
+                if (pPiece->GetColor() == GetColor())
+                {
+                    break;
+                }
+                else
+                {
+                    moves.push_back(currentIndex);
+                    break;
+                }
             }
-            else
+            moves.push_back(currentIndex);
+            if (currentIndex > (Chess::kBoardSize - 1) - Chess::kBoardWidth)
             {
                 break;
             }
-
-            currentIndex += Chess::kBoardHeight;
-
-            if (currentIndex < (Chess::kBoardSize - 1) - (Chess::kBoardWidth))
-            {
-                pSquare = &pGameState->GetSquare(currentIndex);
-            }
-            else
-            {
-                pSquare = nullptr;
-            }
-
+            currentIndex += Chess::kBoardWidth;
         }
     }
-
 
     return moves;
 }
