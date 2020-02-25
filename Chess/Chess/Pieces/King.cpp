@@ -20,29 +20,6 @@ std::vector<unsigned int> King::GetAvailableMoves(ChessGameState* pGameState)
     //todo refactor castling
     if (!HasMoved()) 
     {
-
-        //Piece* pLeftPiece = pGameState->GetSquare(m_index - leftRook).GetPiece();
-        //bool rookAvailable = pLeftPiece && pLeftPiece->GetType() == Chess::Piece::kRook &&
-        //    pLeftPiece->GetColor() == GetColor() && !pLeftPiece->HasMoved();
-
-        //bool clearPath = true;
-
-        //for (int i = 1; i < leftRook; ++i) 
-        //{
-        //    if (pGameState->GetSquare(m_index - i).GetPiece()) 
-        //    {
-        //        clearPath = false;
-        //        break;
-        //    }
-        //}
-
-
-        //if (rookAvailable && clearPath) 
-        //{
-        //    moves.push_back(m_index - leftRook);
-        //    m_castle = true;
-        //}
-
         unsigned int leftRook = 3;
         unsigned int rightRook = 4;
         // check if we can castle 
@@ -64,10 +41,83 @@ std::vector<unsigned int> King::GetAvailableMoves(ChessGameState* pGameState)
 
     if (remainder != Chess::kLeftSideRemainder) 
     {
+        // move left
+        Piece* pPiece = pGameState->GetSquare(m_index - kingMovement).GetPiece();
+        if (!(pPiece && pPiece->GetColor() == GetColor())) 
+        {
+            moves.push_back(m_index - kingMovement);
+        }
 
+        // move down to the left
+        if (Chess::IsValidIndex((m_index - kingMovement) + Chess::kBoardWidth)) 
+        {
+            pPiece = pGameState->GetSquare((m_index - kingMovement) + Chess::kBoardWidth).GetPiece();
+            if (!(pPiece && pPiece->GetColor() == GetColor()))
+            {
+                moves.push_back((m_index - kingMovement) + Chess::kBoardWidth);
+            }
+        }
+
+        // move up to the left
+        if (Chess::IsValidIndex((m_index - kingMovement) - Chess::kBoardWidth))
+        {
+            pPiece = pGameState->GetSquare((m_index - kingMovement) - Chess::kBoardWidth).GetPiece();
+            if (!(pPiece && pPiece->GetColor() == GetColor()))
+            {
+                moves.push_back((m_index - kingMovement) - Chess::kBoardWidth);
+            }
+        }
     }
 
+    if (remainder != Chess::kRightSideRemainder) 
+    {
+        // move right
+        Piece* pPiece = pGameState->GetSquare(m_index + kingMovement).GetPiece();
+        if (!(pPiece && pPiece->GetColor() == GetColor()))
+        {
+            moves.push_back(m_index + kingMovement);
+        }
 
+        // move down to the right
+        if (Chess::IsValidIndex((m_index + kingMovement) + Chess::kBoardWidth))
+        {
+            pPiece = pGameState->GetSquare((m_index + kingMovement) + Chess::kBoardWidth).GetPiece();
+            if (!(pPiece && pPiece->GetColor() == GetColor()))
+            {
+                moves.push_back((m_index + kingMovement) + Chess::kBoardWidth);
+            }
+        }
+
+        // move up to the right
+        if (Chess::IsValidIndex((m_index + kingMovement) - Chess::kBoardWidth))
+        {
+            pPiece = pGameState->GetSquare((m_index + kingMovement) - Chess::kBoardWidth).GetPiece();
+            if (!(pPiece && pPiece->GetColor() == GetColor()))
+            {
+                moves.push_back((m_index + kingMovement) - Chess::kBoardWidth);
+            }
+        }
+    }
+
+    // move down
+    if (Chess::IsValidIndex(m_index + Chess::kBoardWidth)) 
+    {
+        Piece* pPiece = pGameState->GetSquare(m_index + Chess::kBoardWidth).GetPiece();
+        if (!(pPiece && pPiece->GetColor() == GetColor()))
+        {
+            moves.push_back(m_index + Chess::kBoardWidth);
+        }
+    }
+
+    // move up
+    if (Chess::IsValidIndex(m_index - Chess::kBoardWidth))
+    {
+        Piece* pPiece = pGameState->GetSquare(m_index - Chess::kBoardWidth).GetPiece();
+        if (!(pPiece && pPiece->GetColor() == GetColor()))
+        {
+            moves.push_back(m_index - Chess::kBoardWidth);
+        }
+    }
 
     return moves;
 }

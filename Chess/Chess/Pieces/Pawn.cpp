@@ -12,7 +12,7 @@ Pawn::Pawn(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 
 void Pawn::Move(unsigned int move)
 {
-    m_hasMoved = true;
+    SetMoved();
     Piece::Move(move);
 }
 
@@ -20,7 +20,7 @@ void Pawn::Move(unsigned int move)
 std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
 {
     std::vector<unsigned int> moves{};
-    if(m_hasMoved == false && 
+    if(HasMoved() == false && 
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)).GetPiece() == nullptr &&
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth) * m_moveOffset)).GetPiece() == nullptr)
     {

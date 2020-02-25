@@ -25,11 +25,32 @@ const int ChessBoard::GetAvailableMoves() const
 void ChessBoard::MakeMove(unsigned int move)
 {
     Piece* pPiece = m_currentState.GetSquare(move).GetPiece();
-    if (pPiece) 
+
+    switch (m_selectedPiece->GetType())
     {
-        m_currentState.RemovePiece(pPiece);
+    case Chess::Piece::kKing:
+        if (pPiece) 
+        {
+            bool isSameColorRook = pPiece->GetColor() == m_selectedPiece->GetColor() &&
+                pPiece->GetType() == Chess::Piece::kRook;
+
+            if (((isSameColorRook && !m_selectedPiece->HasMoved() 
+                && !pPiece->HasMoved())))
+            {
+                m_currentState.GetSquare(m_selectedPiece->GetIndex()).SetPiece(pPiece);
+                pPiece->Move(m_selectedPiece->GetIndex());
+                break;
+            }
+        }
+    case Chess::Piece::kPawn:
+    default:
+        if (pPiece)
+        {
+            m_currentState.RemovePiece(pPiece);
+        }
+        m_currentState.GetSquare(m_selectedPiece->GetIndex()).SetPiece(nullptr);
     }
-    m_currentState.GetSquare(m_selectedPiece->GetIndex()).SetPiece(nullptr);
+
     m_selectedPiece->Move(move);
     Square* pSquare = &m_currentState.GetSquare(move);
     pSquare->SetPiece(m_selectedPiece);
@@ -52,7 +73,7 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     m_currentState.Render(pRenderer);
     if (!m_moves.empty())
     {
-        for (unsigned int move: m_moves)
+        for (unsigned int move : m_moves)
         {
             SDL_SetRenderDrawBlendMode(pRenderer, SDL_BLENDMODE_BLEND);
             SDL_SetRenderDrawColor(pRenderer, 150, 0, 150, 128);

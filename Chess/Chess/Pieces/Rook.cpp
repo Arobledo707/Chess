@@ -2,7 +2,7 @@
 #include "../ChessGameState.h"
 
 Rook::Rook(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
-    :Piece(pTexture, color, index, Chess::Piece::kRook), m_hasMoved(false)
+    :Piece(pTexture, color, index, Chess::Piece::kRook)
 {
 }
 
