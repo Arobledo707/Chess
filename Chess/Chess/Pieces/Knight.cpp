@@ -73,13 +73,23 @@ std::vector<unsigned int> Knight::GetAvailableMoves(ChessGameState* pGameState)
             AddMoveIfValid(topRightIndex, moves, pGameState);
         }
 
+        // Bottom Right
+        // [ ]
+        // [ ][X]
+        if (Chess::IsValidIndex(bottomRightIndex))
+        {
+            AddMoveIfValid(bottomRightIndex, moves, pGameState);
+        }
+    }
+
+    if (remainder <= kKnightRightRemainder - kKightLeftRemainder) 
+    {
         // Right Top
         //    [X]
         // [ ][ ]
         if (Chess::IsValidIndex(rightTopIndex))
         {
             AddMoveIfValid(rightTopIndex, moves, pGameState);
-
         }
 
         // Right Bottom
@@ -88,14 +98,6 @@ std::vector<unsigned int> Knight::GetAvailableMoves(ChessGameState* pGameState)
         if (Chess::IsValidIndex(rightBottomIndex))
         {
             AddMoveIfValid(rightBottomIndex, moves, pGameState);
-        }
-
-        // Bottom Right
-        // [ ]
-        // [ ][X]
-        if (Chess::IsValidIndex(bottomRightIndex))
-        {
-            AddMoveIfValid(bottomRightIndex, moves, pGameState);
         }
     }
     return moves;
