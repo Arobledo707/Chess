@@ -9,7 +9,6 @@ public:
     virtual void Move(unsigned int move) override;
     virtual std::vector<unsigned int> GetAvailableMoves(ChessGameState* pGameState) override;
 private:
-    bool m_hasMoved = false;
     int m_moveOffset = 1;
 };
 

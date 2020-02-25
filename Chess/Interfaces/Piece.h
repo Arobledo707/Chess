@@ -21,6 +21,9 @@ public:
     const Chess::Color GetColor() { return m_color; }
     SDL_Texture* GetTexture() const { return m_pTexture; }
     unsigned int GetIndex() const { return m_index; }
+    Chess::Piece GetType() const { return m_type; }
+    bool HasMoved() { return m_hasMoved; }
+    void SetMoved() { m_hasMoved = true; }
 
 protected:
     void SetPosition(unsigned int x, unsigned int y) { m_rect.x = x; m_rect.y = y; };
@@ -32,5 +35,6 @@ private:
     SDL_Texture* m_pTexture;
     Chess::Piece m_type;
     SDL_Rect m_rect { 0, 0, Chess::kSquareWidth, Chess::kSquareWidth};
+    bool m_hasMoved = false;
 };
 

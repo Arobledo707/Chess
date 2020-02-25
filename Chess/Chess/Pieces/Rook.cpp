@@ -8,7 +8,7 @@ Rook::Rook(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 
 void Rook::Move(unsigned int move)
 {
-    m_hasMoved = true;
+    SetMoved();
     Piece::Move(move);
 }
 
