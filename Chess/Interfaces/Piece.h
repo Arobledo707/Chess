@@ -28,6 +28,7 @@ public:
 protected:
     void SetPosition(unsigned int x, unsigned int y) { m_rect.x = x; m_rect.y = y; };
     SDL_Rect GetRect() const { return m_rect; }
+    void AddMoveIfValid(unsigned int index, std::vector<unsigned int>& moves, ChessGameState* pGameState);
     unsigned int m_index;
 
 private:

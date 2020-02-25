@@ -7,10 +7,7 @@ public:
     // Inherited via Piece
     virtual void Move(unsigned int move) override;
     virtual std::vector<unsigned int> GetAvailableMoves(ChessGameState* pGameState) override;
-    const bool const IsCastling() const { return m_castle; }
 private:
     bool CanCastle(int index, bool leftSide, ChessGameState* pGameState);
-private:
-    bool m_castle = false;
 };
 

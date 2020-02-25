@@ -17,7 +17,6 @@ std::vector<unsigned int> King::GetAvailableMoves(ChessGameState* pGameState)
     std::vector<unsigned int> moves;
     int kingMovement = 1;
 
-    //todo refactor castling
     if (!HasMoved()) 
     {
         unsigned int leftRook = 3;
@@ -35,88 +34,55 @@ std::vector<unsigned int> King::GetAvailableMoves(ChessGameState* pGameState)
         {
             moves.push_back(m_index + rightRook);
         }
-
     }
     int remainder = m_index % Chess::kBoardWidth;
 
     if (remainder != Chess::kLeftSideRemainder) 
     {
         // move left
-        Piece* pPiece = pGameState->GetSquare(m_index - kingMovement).GetPiece();
-        if (!(pPiece && pPiece->GetColor() == GetColor())) 
-        {
-            moves.push_back(m_index - kingMovement);
-        }
+        AddMoveIfValid(m_index - kingMovement, moves, pGameState);
 
         // move down to the left
         if (Chess::IsValidIndex((m_index - kingMovement) + Chess::kBoardWidth)) 
         {
-            pPiece = pGameState->GetSquare((m_index - kingMovement) + Chess::kBoardWidth).GetPiece();
-            if (!(pPiece && pPiece->GetColor() == GetColor()))
-            {
-                moves.push_back((m_index - kingMovement) + Chess::kBoardWidth);
-            }
+            AddMoveIfValid(m_index - kingMovement + Chess::kBoardWidth, moves, pGameState);
         }
 
         // move up to the left
         if (Chess::IsValidIndex((m_index - kingMovement) - Chess::kBoardWidth))
         {
-            pPiece = pGameState->GetSquare((m_index - kingMovement) - Chess::kBoardWidth).GetPiece();
-            if (!(pPiece && pPiece->GetColor() == GetColor()))
-            {
-                moves.push_back((m_index - kingMovement) - Chess::kBoardWidth);
-            }
+            AddMoveIfValid(m_index - kingMovement - Chess::kBoardWidth, moves, pGameState);
         }
     }
 
     if (remainder != Chess::kRightSideRemainder) 
     {
         // move right
-        Piece* pPiece = pGameState->GetSquare(m_index + kingMovement).GetPiece();
-        if (!(pPiece && pPiece->GetColor() == GetColor()))
-        {
-            moves.push_back(m_index + kingMovement);
-        }
+        AddMoveIfValid(m_index + kingMovement, moves, pGameState);
 
         // move down to the right
         if (Chess::IsValidIndex((m_index + kingMovement) + Chess::kBoardWidth))
         {
-            pPiece = pGameState->GetSquare((m_index + kingMovement) + Chess::kBoardWidth).GetPiece();
-            if (!(pPiece && pPiece->GetColor() == GetColor()))
-            {
-                moves.push_back((m_index + kingMovement) + Chess::kBoardWidth);
-            }
+            AddMoveIfValid(m_index + kingMovement + Chess::kBoardWidth, moves, pGameState);
         }
 
         // move up to the right
         if (Chess::IsValidIndex((m_index + kingMovement) - Chess::kBoardWidth))
         {
-            pPiece = pGameState->GetSquare((m_index + kingMovement) - Chess::kBoardWidth).GetPiece();
-            if (!(pPiece && pPiece->GetColor() == GetColor()))
-            {
-                moves.push_back((m_index + kingMovement) - Chess::kBoardWidth);
-            }
+            AddMoveIfValid((m_index + kingMovement) - Chess::kBoardWidth, moves, pGameState);
         }
     }
 
     // move down
     if (Chess::IsValidIndex(m_index + Chess::kBoardWidth)) 
     {
-        Piece* pPiece = pGameState->GetSquare(m_index + Chess::kBoardWidth).GetPiece();
-        if (!(pPiece && pPiece->GetColor() == GetColor()))
-        {
-            moves.push_back(m_index + Chess::kBoardWidth);
-        }
+        AddMoveIfValid(m_index + Chess::kBoardWidth, moves, pGameState);
     }
 
     // move up
     if (Chess::IsValidIndex(m_index - Chess::kBoardWidth))
     {
-        Piece* pPiece = pGameState->GetSquare(m_index - Chess::kBoardWidth).GetPiece();
-        if (!(pPiece && pPiece->GetColor() == GetColor()))
-        {
-            moves.push_back(m_index - Chess::kBoardWidth);
-        }
+        AddMoveIfValid(m_index - Chess::kBoardWidth, moves, pGameState);
     }
 
     return moves;
