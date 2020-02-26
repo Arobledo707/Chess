@@ -24,6 +24,7 @@ public:
     Chess::Piece GetType() const { return m_type; }
     bool HasMoved() { return m_hasMoved; }
     void SetMoved() { m_hasMoved = true; }
+    void CanCheck(Piece* pPiece);
 
 protected:
     void SetPosition(unsigned int x, unsigned int y) { m_rect.x = x; m_rect.y = y; };

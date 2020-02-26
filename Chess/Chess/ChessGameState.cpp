@@ -17,14 +17,9 @@ ChessGameState::ChessGameState()
     ResetBoard();
 }
 
-void ChessGameState::SpawnPieces(const SDLTextureManager& textureManager)
-{
-    //SpawnPawns(textureManager);
-}
 
 void ChessGameState::Render(SDL_Renderer* pRenderer)
 {
-
     for (const Square& square: m_squares) 
     {
         square.Render(pRenderer);
@@ -39,6 +34,17 @@ void ChessGameState::Render(SDL_Renderer* pRenderer)
 
 void ChessGameState::AddPiece(std::unique_ptr<Piece> piece, unsigned int i)
 {
+    if (piece.get()->GetType() == Chess::Piece::kKing) 
+    {
+        if (piece.get()->GetColor() == Chess::Color::kBlack) 
+        {
+            m_pBlackKing = dynamic_cast<King*>(piece.get());
+        }
+        else 
+        {
+            m_pWhiteKing = dynamic_cast<King*>(piece.get());
+        }
+    }
     m_pieces.push_back(std::move(piece));
     m_squares[i].SetPiece(m_pieces.back().get());
 }

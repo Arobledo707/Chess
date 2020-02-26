@@ -60,6 +60,14 @@ void ChessBoard::MakeMove(unsigned int move)
 
 int ChessBoard::CheckForGameEnd() const
 {
+    if (m_currentState.GetBlackKing() == nullptr)
+    {
+        return (int)Chess::Color::kBlack;
+    }
+    if (m_currentState.GetWhiteKing() == nullptr)
+    {
+        return (int)Chess::Color::kWhite;
+    }
     return 0;
 }
 
