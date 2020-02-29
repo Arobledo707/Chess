@@ -12,10 +12,13 @@ void Piece::Move(unsigned int move)
 
 void Piece::CanCheck(Piece* pPiece)
 {
-    if (pPiece->GetType() == Chess::Piece::kKing) 
+    if (pPiece)
     {
-        static_cast<King*>(pPiece)->SetCheck(true);
-        std::cout << "King is in check" << std::endl;
+        if (pPiece->GetType() == Chess::Piece::kKing)
+        {
+            static_cast<King*>(pPiece)->SetCheck(true);
+            std::cout << "King is in check" << std::endl;
+        }
     }
 }
 
