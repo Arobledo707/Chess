@@ -3,7 +3,7 @@
 #include <vector>
 #include <SDL.h>
 #include "../Constants/ChessConstants.h"
-
+#include "../Constants/Constants.h"
 struct ChessGameState;
 
 class Piece
@@ -17,7 +17,7 @@ public:
     };
     virtual void Move(unsigned int move);
     void Render(SDL_Renderer* pRenderer) { SDL_RenderCopy(pRenderer, GetTexture(), NULL, &GetRect()); }
-    virtual std::vector<unsigned int> GetAvailableMoves(ChessGameState* pGameState) = 0;
+    virtual Moves GetAvailableMoves(ChessGameState* pGameState) = 0;
     const Chess::Color GetColor() { return m_color; }
     SDL_Texture* GetTexture() const { return m_pTexture; }
     unsigned int GetIndex() const { return m_index; }
@@ -29,7 +29,7 @@ public:
 protected:
     void SetPosition(unsigned int x, unsigned int y) { m_rect.x = x; m_rect.y = y; };
     SDL_Rect GetRect() const { return m_rect; }
-    void AddMoveIfValid(unsigned int index, std::vector<unsigned int>& moves, ChessGameState* pGameState);
+    void AddMoveIfValid(unsigned int index, Moves& moves, ChessGameState* pGameState);
     unsigned int m_index;
 
 private:

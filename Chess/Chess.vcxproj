@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI\MonteCarloTreeSearchAi.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Chess\ChessBoard.cpp" />
     <ClCompile Include="Chess\ChessGameState.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="SDLTextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI\MonteCarloTreeSearchAi.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Chess\ChessBoard.h" />
     <ClInclude Include="Chess\ChessGameState.h" />

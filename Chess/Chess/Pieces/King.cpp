@@ -12,9 +12,9 @@ void King::Move(unsigned int move)
 }
 
 
-std::vector<unsigned int> King::GetAvailableMoves(ChessGameState* pGameState)
+Moves King::GetAvailableMoves(ChessGameState* pGameState)
 {
-    std::vector<unsigned int> moves;
+    Moves moves;
     int kingMovement = 1;
 
     if (!HasMoved()) 
@@ -26,13 +26,13 @@ std::vector<unsigned int> King::GetAvailableMoves(ChessGameState* pGameState)
         // left side castle
         if (CanCastle(leftRook, true, pGameState)) 
         {
-            moves.push_back(m_index - leftRook);
+            moves.push_back(std::pair<int, int>((int)GetColor(), m_index - leftRook));
         }
 
         //right side castle
         if (CanCastle(rightRook, false, pGameState)) 
         {
-            moves.push_back(m_index + rightRook);
+            moves.push_back(std::pair<int, int>((int)GetColor(), m_index + rightRook));
         }
     }
     int remainder = m_index % Chess::kBoardWidth;

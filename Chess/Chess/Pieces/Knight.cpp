@@ -7,11 +7,11 @@ Knight::Knight(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 }
 
 
-std::vector<unsigned int> Knight::GetAvailableMoves(ChessGameState* pGameState)
+Moves Knight::GetAvailableMoves(ChessGameState* pGameState)
 {
     assert(Chess::IsValidIndex(m_index));
 
-    std::vector<unsigned int> moves;
+    Moves moves;
     int remainder = m_index % Chess::kBoardWidth;
     const unsigned int kKightLeftRemainder = 1;
     const unsigned int kKnightRightRemainder = 6;

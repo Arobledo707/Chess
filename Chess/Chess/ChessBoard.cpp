@@ -1,15 +1,31 @@
 #include "ChessBoard.h"
 #include <SDL.h>
+#include <ctime>
 
 ChessBoard::ChessBoard()
     : m_selectedPiece(nullptr)
 {
+    std::srand(std::time(nullptr));
 }
 
-void ChessBoard::StartGame()
+ChessBoard::ChessBoard(const ChessBoard& board)
 {
+    m_currentState = board.m_currentState;
+}
+
+ChessBoard& ChessBoard::operator=(const ChessBoard& board)
+{
+    m_currentState = board.m_currentState;
+    return (*this);
+}
+
+
+int ChessBoard::StartGame()
+{
+    int aiNumber = AssignRoles();
     m_currentState.ResetBoard();
     SpawnPieces();
+    return aiNumber;
 }
 
 const int ChessBoard::GetCurrentPlayer() const
@@ -17,14 +33,23 @@ const int ChessBoard::GetCurrentPlayer() const
     return static_cast<int>(m_currentTurn);
 }
 
-const int ChessBoard::GetAvailableMoves() const
+const Moves ChessBoard::GetAvailableMoves()
 {
-    return 0;
+    Moves moves;
+    for (std::unique_ptr<Piece>& piece : m_currentState.GetPieces()) 
+    {
+        Moves tempMoves = (piece.get()->GetAvailableMoves(&m_currentState));
+        for (Move& move : tempMoves) 
+        {
+            moves.push_back(std::move(move));
+        }
+    }
+    return moves;
 }
 
-void ChessBoard::MakeMove(unsigned int move)
+void ChessBoard::MakeMove(Move move)
 {
-    Piece* pPiece = m_currentState.GetSquare(move).GetPiece();
+    Piece* pPiece = m_currentState.GetSquare(move.second).GetPiece();
 
     switch (m_selectedPiece->GetType())
     {
@@ -51,8 +76,8 @@ void ChessBoard::MakeMove(unsigned int move)
         m_currentState.GetSquare(m_selectedPiece->GetIndex()).SetPiece(nullptr);
     }
 
-    m_selectedPiece->Move(move);
-    Square* pSquare = &m_currentState.GetSquare(move);
+    m_selectedPiece->Move(move.second);
+    Square* pSquare = &m_currentState.GetSquare(move.second);
     pSquare->SetPiece(m_selectedPiece);
     m_moves.clear();
     m_selectedPiece = nullptr;
@@ -81,11 +106,11 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     m_currentState.Render(pRenderer);
     if (!m_moves.empty())
     {
-        for (unsigned int move : m_moves)
+        for (auto move : m_moves)
         {
             SDL_SetRenderDrawBlendMode(pRenderer, SDL_BLENDMODE_BLEND);
             SDL_SetRenderDrawColor(pRenderer, 150, 0, 150, 128);
-            SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move).GetRect());
+            SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move.second).GetRect());
         }
     }
 }
@@ -189,6 +214,39 @@ void ChessBoard::SpawnPawns()
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
 }
 
+int ChessBoard::AssignRoles()
+{
+    // if player is 0 then player is white
+    int playerColor = std::rand() % 2;
+    if (playerColor == 0) 
+    {
+        m_playerColor = Chess::Color::kWhite;
+        return int(Chess::Color::kBlack);
+    }
+    else 
+    {
+        m_playerColor = Chess::Color::kBlack;
+        return int(Chess::Color::kWhite);
+    }
+}
+
+const int ChessBoard::GetPlayerColor() const
+{
+    return static_cast<int>(m_playerColor);
+}
+
+void ChessBoard::AlternateTurns()
+{
+    if (m_currentTurn == Chess::Color::kBlack) 
+    {
+        m_currentTurn = Chess::Color::kWhite;
+    } 
+    else
+    {
+        m_currentTurn = Chess::Color::kBlack;
+    }
+}
+
 const bool ChessBoard::OnClick()
 {
     int x = 0;
@@ -203,9 +261,10 @@ const bool ChessBoard::OnClick()
     {
         for (int i = 0; i < m_moves.size(); ++i)
         {
-            if (index == m_moves[i])
+            if (index == m_moves[i].second)
             {
-                MakeMove(index);
+                MakeMove(std::pair<int, int>((int)m_currentTurn, index));
+                AlternateTurns();
                 return true;
             }
         }
@@ -220,6 +279,12 @@ const bool ChessBoard::OnClick()
     }
 
     return false;
+}
+
+Board* ChessBoard::CloneSelf() const
+{
+    ChessBoard* pChessBoard = new ChessBoard(*this);
+    return pChessBoard;
 }
 
 void ChessBoard::Initialize(SDL_Renderer* pRenderer)

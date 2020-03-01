@@ -5,12 +5,8 @@ Queen::Queen(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
 {
 }
 
-void Queen::Move(unsigned int move)
-{
-}
 
-
-std::vector<unsigned int> Queen::GetAvailableMoves(ChessGameState* pGameState)
+Moves Queen::GetAvailableMoves(ChessGameState* pGameState)
 {
-    return std::vector<unsigned int>();
+    return Moves();
 }

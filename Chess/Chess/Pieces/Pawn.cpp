@@ -17,14 +17,14 @@ void Pawn::Move(unsigned int move)
 }
 
 
-std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
+Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
 {
-    std::vector<unsigned int> moves{};
+    Moves moves{};
     if(HasMoved() == false && 
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)).GetPiece() == nullptr &&
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth) * m_moveOffset)).GetPiece() == nullptr)
     {
-        moves.push_back(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset));
+        moves.push_back(std::pair<int, int>((int)GetColor(), m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)));
     }
     bool atTopRow = m_index < Chess::kBoardWidth;
     bool atBottomRow = m_index > ((Chess::kBoardSize) - 1) - Chess::kBoardWidth;
@@ -33,7 +33,7 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
     {
         if (pGameState->GetSquare(m_index + (Chess::kBoardWidth * m_moveOffset)).GetPiece() == nullptr)
         {
-            moves.push_back(m_index + (Chess::kBoardWidth * m_moveOffset));
+            moves.push_back(std::pair<int, int>((int)GetColor(), m_index + (Chess::kBoardWidth * m_moveOffset)));
         }
 
         unsigned int rightDiagonalIndex = m_index + (Chess::kBoardWidth * m_moveOffset) + 1;
@@ -45,7 +45,7 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
             if (pGameState->GetSquare(rightDiagonalIndex).GetPiece() != nullptr &&
                 pGameState->GetSquare(rightDiagonalIndex).GetPiece()->GetColor() != GetColor())
             {
-                moves.push_back(rightDiagonalIndex);
+                moves.push_back(std::pair<int, int>((int)GetColor(), rightDiagonalIndex));
             }
         }
         if (remainder != Chess::kLeftSideRemainder)
@@ -53,7 +53,7 @@ std::vector<unsigned int> Pawn::GetAvailableMoves(ChessGameState* pGameState)
             if (pGameState->GetSquare(leftDiagonalIndex).GetPiece() != nullptr &&
                 pGameState->GetSquare(leftDiagonalIndex).GetPiece()->GetColor() != GetColor())
             {
-                moves.push_back(leftDiagonalIndex);
+                moves.push_back(std::pair<int, int>((int)GetColor(), leftDiagonalIndex));
             }
         }
     }

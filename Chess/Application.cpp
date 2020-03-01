@@ -11,7 +11,7 @@
 Application::Application()
     :m_pWindow(nullptr, SDL_DestroyWindow),
     m_pRenderer(nullptr, SDL_DestroyRenderer),
-    m_pBoard(nullptr)
+    m_pBoard(nullptr), m_ai(nullptr)
 {
 
 }
@@ -32,6 +32,7 @@ bool Application::Initialize()
     }
     
     m_pBoard = std::make_unique<ChessBoard>();
+    m_ai.SetBoard(m_pBoard.get());
 
     return true;
 
@@ -69,12 +70,21 @@ void Application::Run()
 
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                m_pBoard.get()->OnClick();
+                if (m_pBoard.get()->GetCurrentPlayer() == m_pBoard.get()->GetPlayerColor())
+                {
+                    m_pBoard.get()->OnClick();
+                }
                 break;
             default:
                 break;
             }
         }
+        if (m_pBoard.get()->GetCurrentPlayer() != m_pBoard.get()->GetPlayerColor())
+        {
+            m_pBoard.get()->MakeMove(m_ai.FindBestMove());
+            m_pBoard->AlternateTurns();
+        }
+
 
         SDL_SetRenderDrawColor(m_pRenderer.get(), 150, 150, 150, 255);
         SDL_RenderClear(m_pRenderer.get());

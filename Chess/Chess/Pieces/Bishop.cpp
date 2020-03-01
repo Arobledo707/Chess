@@ -1,16 +1,16 @@
 #include "Bishop.h"
 #include "../ChessGameState.h"
+#include "../../Constants/Constants.h"
 
 Bishop::Bishop(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
     :Piece(pTexture, color, index, Chess::Piece::kBishop)
 {
 }
-
-std::vector<unsigned int> Bishop::GetAvailableMoves(ChessGameState* pGameState)
+Moves Bishop::GetAvailableMoves(ChessGameState* pGameState)
 {
     assert(Chess::IsValidIndex(m_index));
 
-    std::vector<unsigned int> moves{};
+    Moves moves{};
 
     int remainder = m_index % Chess::kBoardWidth;
 
@@ -30,11 +30,11 @@ std::vector<unsigned int> Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
             currentIndex -= (Chess::kBoardWidth - 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kLeftSideRemainder)
@@ -56,11 +56,11 @@ std::vector<unsigned int> Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
             currentIndex += (Chess::kBoardWidth + 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kLeftSideRemainder)
@@ -88,11 +88,11 @@ std::vector<unsigned int> Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
             currentIndex -= (Chess::kBoardWidth + 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kRightSideRemainder)
@@ -114,11 +114,11 @@ std::vector<unsigned int> Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
             currentIndex += (Chess::kBoardWidth - 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kRightSideRemainder)

@@ -13,11 +13,11 @@ void Rook::Move(unsigned int move)
 }
 
 
-std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
+Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
 {
     assert(Chess::IsValidIndex(m_index));
 
-    std::vector<unsigned int> moves{};
+    Moves moves{};
 
     //horizontal moves
     // if the remainder isnt 0 then we can move left
@@ -36,11 +36,11 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
         }
     }
 
@@ -59,11 +59,11 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
         }
     }
 
@@ -83,11 +83,11 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
             if (currentIndex < Chess::kBoardWidth)
             {
                 break;
@@ -111,11 +111,11 @@ std::vector<unsigned int> Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(currentIndex);
+                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
                     break;
                 }
             }
-            moves.push_back(currentIndex);
+            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
             if (currentIndex > (Chess::kBoardSize - 1) - Chess::kBoardWidth)
             {
                 break;

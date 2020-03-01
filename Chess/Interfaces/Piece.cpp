@@ -22,12 +22,12 @@ void Piece::CanCheck(Piece* pPiece)
     }
 }
 
-void Piece::AddMoveIfValid(unsigned int index, std::vector<unsigned int>& moves, ChessGameState* pGameState)
+void Piece::AddMoveIfValid(unsigned int index, Moves& moves, ChessGameState* pGameState)
 {
     Piece* pPiece = pGameState->GetSquare(index).GetPiece();
     if (!(pPiece && pPiece->GetColor() == GetColor()))
     {
-        moves.push_back(index);
+        moves.push_back(std::pair<int, int>((int)GetColor(), index));
         CanCheck(pPiece);
     }
 }

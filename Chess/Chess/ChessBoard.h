@@ -10,30 +10,42 @@ class ChessBoard : public Board
 {
 public:
     ChessBoard();
+    ChessBoard(const ChessBoard& board);
+    ChessBoard& operator=(const ChessBoard& board);
+
     // Inherited via Board
     virtual void Initialize(SDL_Renderer* pRenderer) override;
-    virtual void StartGame() override;
+    virtual int StartGame() override;
     virtual const int GetCurrentPlayer() const override;
-    virtual const int GetAvailableMoves() const override;
-    virtual void MakeMove(unsigned int move) override;
+    virtual const Moves GetAvailableMoves() override;
+    virtual void MakeMove(Move) override;
     virtual int CheckForGameEnd() const override;
     virtual int PrintGameEnd() override;
     virtual void Render(SDL_Renderer* pRenderer) override;
+    virtual Board* CloneSelf() const override;
+    virtual const bool OnClick() override;
+
     
 private:
     void SpawnPieces();
     void SpawnPawns();
+    int AssignRoles();
 private:
     ChessGameState m_currentState;
     SDLTextureManager m_textureManager;
     std::unique_ptr<PieceFactory> m_pieceFactory;
     Piece* m_selectedPiece;
-    Chess::Color m_currentTurn;
+    Chess::Color m_currentTurn = Chess::Color::kWhite;
+    Chess::Color m_playerColor;
+    Moves m_moves{};
 
-    std::vector<unsigned int> m_moves{};
 
     // Inherited via Board
-    virtual const bool OnClick() override;
+    virtual const int GetPlayerColor() const override;
+
+
+    // Inherited via Board
+    virtual void AlternateTurns() override;
 
 };
 

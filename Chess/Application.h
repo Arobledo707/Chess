@@ -1,5 +1,6 @@
 #pragma once
 #include "Interfaces/Board.h"
+#include "AI/MonteCarloTreeSearchAi.h"
 #include <memory>
 
 struct SDL_Renderer;
@@ -17,6 +18,7 @@ private:
     std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> m_pWindow;
     std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> m_pRenderer;
     std::unique_ptr<Board> m_pBoard;
+    MonteCarloTreeSearchAi m_ai;
 
 };
 

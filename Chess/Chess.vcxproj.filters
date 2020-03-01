@@ -27,6 +27,9 @@
     <Filter Include="Constants">
       <UniqueIdentifier>{308bf9a3-b788-428f-b16e-433b547982f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{aff16564-4924-4e99-b2e0-47211ffd5055}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="Interfaces\Piece.cpp">
       <Filter>Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\MonteCarloTreeSearchAi.cpp">
+      <Filter>AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,5 +131,8 @@
       <Filter>Chess\Factory</Filter>
     </ClInclude>
     <ClInclude Include="SDLTextureManager.h" />
+    <ClInclude Include="AI\MonteCarloTreeSearchAi.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

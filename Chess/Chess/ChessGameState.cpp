@@ -17,6 +17,27 @@ ChessGameState::ChessGameState()
     ResetBoard();
 }
 
+ChessGameState::ChessGameState(const ChessGameState& state)
+{
+    Copy(state);
+}
+
+ChessGameState& ChessGameState::operator=(const ChessGameState& state)
+{
+    Copy(state);
+    return(*this);
+}
+
+void ChessGameState::Copy(const ChessGameState& cgs)
+{
+    memcpy(m_squares, cgs.m_squares, sizeof(Square) * Chess::kBoardSize);
+    memcpy(&m_pieces, &cgs.m_pieces, sizeof(std::unique_ptr<Piece>)* cgs.m_pieces.size());
+    m_pieceFactory = std::make_unique<PieceFactory>();
+    m_pBlackKing = cgs.m_pBlackKing;
+    m_pWhiteKing = cgs.m_pWhiteKing;
+
+}
+
 
 void ChessGameState::Render(SDL_Renderer* pRenderer)
 {
