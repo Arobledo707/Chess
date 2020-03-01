@@ -15,6 +15,10 @@ public:
         m_rect.x = (index % Chess::kBoardWidth) * Chess::kSquareWidth;
         m_rect.y = (index / Chess::kBoardWidth) * Chess::kSquareWidth;
     };
+
+    Piece(const Piece& piece);
+    Piece& operator=(const Piece& piece);
+
     virtual void Move(unsigned int move);
     void Render(SDL_Renderer* pRenderer) { SDL_RenderCopy(pRenderer, GetTexture(), NULL, &GetRect()); }
     virtual Moves GetAvailableMoves(ChessGameState* pGameState) = 0;

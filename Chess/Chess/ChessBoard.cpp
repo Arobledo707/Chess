@@ -36,14 +36,17 @@ const int ChessBoard::GetCurrentPlayer() const
 const Moves ChessBoard::GetAvailableMoves()
 {
     Moves moves;
-    for (std::unique_ptr<Piece>& piece : m_currentState.GetPieces()) 
-    {
-        Moves tempMoves = (piece.get()->GetAvailableMoves(&m_currentState));
-        for (Move& move : tempMoves) 
-        {
-            moves.push_back(std::move(move));
-        }
-    }
+    std::vector<std::unique_ptr<Piece>>& copy = m_currentState.GetPieces();
+    auto move = copy.front().get()->GetAvailableMoves(&m_currentState);
+    moves.push_back(move.front());
+    //for (auto& piece : m_currentState.GetPieces()) 
+    //{
+    //    Moves tempMoves = (piece.get()->GetAvailableMoves(&m_currentState));
+    //    for (Move& move : tempMoves) 
+    //    {
+    //        moves.push_back(move);
+    //    }
+    //}
     return moves;
 }
 

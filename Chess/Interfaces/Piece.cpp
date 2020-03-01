@@ -3,6 +3,26 @@
 #include <cassert>
 #include <iostream>
 
+Piece::Piece(const Piece& piece)
+    : m_color(piece.m_color)
+{
+    m_type = piece.GetType();
+    m_hasMoved = piece.m_hasMoved;
+    m_rect = piece.m_rect;
+    m_index = piece.m_index;
+    m_pTexture = piece.m_pTexture;
+}
+
+Piece& Piece::operator=(const Piece& piece)
+{
+    m_type = piece.GetType();
+    m_hasMoved = piece.m_hasMoved;
+    m_rect = piece.m_rect;
+    m_index = piece.m_index;
+    m_pTexture = piece.m_pTexture;
+    return (*this);
+}
+
 void Piece::Move(unsigned int move)
 {
     assert(Chess::IsValidIndex(move));

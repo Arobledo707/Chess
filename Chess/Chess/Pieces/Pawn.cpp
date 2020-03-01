@@ -33,6 +33,7 @@ Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
     {
         if (pGameState->GetSquare(m_index + (Chess::kBoardWidth * m_moveOffset)).GetPiece() == nullptr)
         {
+            int move = m_index + (Chess::kBoardWidth * m_moveOffset);
             moves.push_back(std::pair<int, int>((int)GetColor(), m_index + (Chess::kBoardWidth * m_moveOffset)));
         }
 
