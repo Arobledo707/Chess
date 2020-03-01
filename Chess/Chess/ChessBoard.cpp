@@ -14,7 +14,7 @@ void ChessBoard::StartGame()
 
 const int ChessBoard::GetCurrentPlayer() const
 {
-    return 0;
+    return static_cast<int>(m_currentTurn);
 }
 
 const int ChessBoard::GetAvailableMoves() const

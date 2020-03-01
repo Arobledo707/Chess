@@ -19,7 +19,7 @@ public:
     virtual int CheckForGameEnd() const override;
     virtual int PrintGameEnd() override;
     virtual void Render(SDL_Renderer* pRenderer) override;
-
+    
 private:
     void SpawnPieces();
     void SpawnPawns();
@@ -28,6 +28,7 @@ private:
     SDLTextureManager m_textureManager;
     std::unique_ptr<PieceFactory> m_pieceFactory;
     Piece* m_selectedPiece;
+    Chess::Color m_currentTurn;
 
     std::vector<unsigned int> m_moves{};
 
