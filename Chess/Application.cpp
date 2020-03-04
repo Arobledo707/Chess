@@ -53,7 +53,7 @@ void Application::Run()
     unsigned long long currentTick = SDL_GetPerformanceCounter();
     unsigned long long lastTick = 0;
 
-    m_pBoard->StartGame();
+    m_ai.SetPlayerNumber(m_pBoard->StartGame());
 
     while (running) 
     {
@@ -70,20 +70,20 @@ void Application::Run()
 
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                if (m_pBoard.get()->GetCurrentPlayer() == m_pBoard.get()->GetPlayerColor())
-                {
+               // if (m_pBoard.get()->GetCurrentPlayer() == m_pBoard.get()->GetPlayerColor())
+               // {
                     m_pBoard.get()->OnClick();
-                }
+                //}
                 break;
             default:
                 break;
             }
         }
-        if (m_pBoard.get()->GetCurrentPlayer() != m_pBoard.get()->GetPlayerColor())
-        {
-            m_pBoard.get()->MakeMove(m_ai.FindBestMove());
-            m_pBoard->AlternateTurns();
-        }
+        //if (m_pBoard.get()->GetCurrentPlayer() != m_pBoard.get()->GetPlayerColor())
+        //{
+        //    m_pBoard.get()->MakeMove(m_ai.FindBestMove());
+        //    m_pBoard->AlternateTurns();
+        //}
 
 
         SDL_SetRenderDrawColor(m_pRenderer.get(), 150, 150, 150, 255);

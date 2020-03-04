@@ -19,7 +19,10 @@ void Pawn::Move(unsigned int move)
 
 Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
 {
+    assert(Chess::IsValidIndex(m_index));
     Moves moves{};
+    Square* pSquare = &pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset));
+    bool spaceIsClear = pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)).GetPiece() == nullptr;
     if(HasMoved() == false && 
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)).GetPiece() == nullptr &&
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth) * m_moveOffset)).GetPiece() == nullptr)
@@ -33,13 +36,13 @@ Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
     {
         if (pGameState->GetSquare(m_index + (Chess::kBoardWidth * m_moveOffset)).GetPiece() == nullptr)
         {
-            int move = m_index + (Chess::kBoardWidth * m_moveOffset);
+            int index = m_index + (Chess::kBoardWidth * m_moveOffset);
             moves.push_back(std::pair<int, int>((int)GetColor(), m_index + (Chess::kBoardWidth * m_moveOffset)));
         }
 
-        unsigned int rightDiagonalIndex = m_index + (Chess::kBoardWidth * m_moveOffset) + 1;
-        unsigned int leftDiagonalIndex = m_index + (Chess::kBoardWidth * m_moveOffset) - 1;
-        unsigned int remainder = m_index % Chess::kBoardWidth;
+        int rightDiagonalIndex = m_index + (Chess::kBoardWidth * m_moveOffset) + 1;
+        int leftDiagonalIndex = m_index + (Chess::kBoardWidth * m_moveOffset) - 1;
+        int remainder = m_index % Chess::kBoardWidth;
 
         if (remainder != Chess::kRightSideRemainder)
         {

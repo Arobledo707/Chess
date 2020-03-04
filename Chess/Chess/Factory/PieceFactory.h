@@ -17,10 +17,10 @@ class PieceFactory
 public:
 
     template<typename T>
-    std::unique_ptr<T>ReturnPiece(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
+    T* ReturnPiece(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
     {
-        std::unique_ptr<T> piece = std::make_unique<T>(pTexture, color, index);
-        return std::move(piece);
+        T* piece = new T(pTexture, color, index);
+        return piece;
     }
 
 };

@@ -51,6 +51,11 @@ Move MonteCarloTreeSearchAi::FindBestMove()
     return pBestNode->GetMove();
 }
 
+void MonteCarloTreeSearchAi::SetPlayerNumber(int playerNumber)
+{
+    m_playerNumber = playerNumber;
+}
+
 
 double MonteCarloTreeSearchAi::UctValue(int totalVisit, double nodeWinScore, int nodeVisit, double c)
 {

@@ -11,11 +11,15 @@ ChessBoard::ChessBoard()
 ChessBoard::ChessBoard(const ChessBoard& board)
 {
     m_currentState = board.m_currentState;
+    m_textureManager = board.m_textureManager;
+    m_currentTurn = board.m_currentTurn;
+    m_playerColor = board.m_playerColor;
 }
 
 ChessBoard& ChessBoard::operator=(const ChessBoard& board)
 {
     m_currentState = board.m_currentState;
+    m_textureManager = board.m_textureManager;
     return (*this);
 }
 
@@ -36,17 +40,18 @@ const int ChessBoard::GetCurrentPlayer() const
 const Moves ChessBoard::GetAvailableMoves()
 {
     Moves moves;
-    std::vector<std::unique_ptr<Piece>>& copy = m_currentState.GetPieces();
-    auto move = copy.front().get()->GetAvailableMoves(&m_currentState);
-    moves.push_back(move.front());
-    //for (auto& piece : m_currentState.GetPieces()) 
-    //{
-    //    Moves tempMoves = (piece.get()->GetAvailableMoves(&m_currentState));
-    //    for (Move& move : tempMoves) 
-    //    {
-    //        moves.push_back(move);
-    //    }
-    //}
+    //std::vector<Piece*> copy = m_currentState.GetPieces();
+    //Piece* piece = copy.front();
+    //Moves pawnMoves = piece->GetAvailableMoves(&m_currentState);
+    //moves.push_back(move.front());
+    for (auto& piece : m_currentState.GetPieces()) 
+    {
+        Moves tempMoves = (piece->GetAvailableMoves(&m_currentState));
+        for (Move& move : tempMoves) 
+        {
+            moves.push_back(move);
+        }
+    }
     return moves;
 }
 
