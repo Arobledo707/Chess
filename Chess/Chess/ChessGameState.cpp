@@ -89,6 +89,19 @@ void ChessGameState::RemovePiece(Piece* pPiece)
     {
         if (pPiece == m_pieces[i])
         {
+            if (pPiece->GetType() == Chess::Piece::kKing) 
+            {
+                if (pPiece->GetColor() == Chess::Color::kWhite) 
+                {
+                    m_pWhiteKing = nullptr;
+                }
+                else 
+                {
+                    m_pBlackKing = nullptr;
+                }
+            }
+            delete m_pieces[i];
+            m_pieces[i] = nullptr;
             std::swap(m_pieces[i], m_pieces.back());
             m_pieces.pop_back();
             break;

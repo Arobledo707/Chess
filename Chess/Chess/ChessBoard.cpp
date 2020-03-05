@@ -100,11 +100,11 @@ int ChessBoard::CheckForGameEnd() const
 {
     if (m_currentState.GetBlackKing() == nullptr)
     {
-        return (int)Chess::Color::kBlack;
+        return (int)Chess::Color::kWhite;
     }
     if (m_currentState.GetWhiteKing() == nullptr)
     {
-        return (int)Chess::Color::kWhite;
+        return (int)Chess::Color::kBlack;
     }
     return 0;
 }
@@ -130,8 +130,8 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
 void ChessBoard::SpawnPieces()
 {
     SpawnPawns();
-    SoawnNonPawns(Chess::Color::kWhite, (Chess::kBoardWidth - 1), 0);
-    SoawnNonPawns(Chess::Color::kBlack, Chess::kBoardSize - 1, Chess::kBoardSize - Chess::kBoardWidth);
+    SpawnNonPawns(Chess::Color::kWhite, (Chess::kBoardWidth - 1), 0);
+    SpawnNonPawns(Chess::Color::kBlack, Chess::kBoardSize - 1, Chess::kBoardSize - Chess::kBoardWidth);
 }
 
 void ChessBoard::SpawnPawns()
@@ -145,6 +145,7 @@ void ChessBoard::SpawnPawns()
             (m_textureManager.GetTexture(Chess::Piece::kPawn, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
     }
 
+    // spawn black pawns
     unsigned int blackPawnIndexEnd = (Chess::kBlackPawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kBlackPawnColumn * Chess::kBoardWidth); i < blackPawnIndexEnd; ++i)
     {
@@ -155,7 +156,7 @@ void ChessBoard::SpawnPawns()
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
 }
 
-void ChessBoard::SoawnNonPawns(Chess::Color color, int maxIndex, int lowIndex)
+void ChessBoard::SpawnNonPawns(Chess::Color color, int maxIndex, int lowIndex)
 {
     for (int i = 0; i < Chess::kBoardWidth / 2; ++i)
     {
