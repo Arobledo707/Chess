@@ -75,20 +75,20 @@ void Application::Run()
 
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                if (m_pBoard->GetCurrentPlayer() == m_pBoard->GetPlayerColor())
-                {
+               // if (m_pBoard->GetCurrentPlayer() == m_pBoard->GetPlayerColor())
+                //{
                     m_pBoard->OnClick();
-                }
+                //}
                 break;
             default:
                 break;
             }
         }
-        if (m_pBoard->GetCurrentPlayer() != m_pBoard->GetPlayerColor())
-        {
-            m_pBoard->MakeMove(m_ai.FindBestMove());
-            m_pBoard->AlternateTurns();
-        }
+        //if (m_pBoard->GetCurrentPlayer() != m_pBoard->GetPlayerColor())
+        //{
+        //    m_pBoard->MakeMove(m_ai.FindBestMove());
+        //    m_pBoard->AlternateTurns();
+        //}
 
 
         SDL_SetRenderDrawColor(m_pRenderer.get(), 150, 150, 150, 255);
@@ -109,6 +109,9 @@ void Application::Run()
 
 void Application::CleanUp()
 {
+    //todo call delete
+    //pieces
+    //board
     TTF_Quit();
     SDL_Quit();
 }
