@@ -47,26 +47,26 @@ void ChessGameState::Render(SDL_Renderer* pRenderer)
 
     for (const auto& piece: m_pieces) 
     {
-        piece.get()->Render(pRenderer);
+        piece->Render(pRenderer);
     }
 
 }
 
-void ChessGameState::AddPiece(std::unique_ptr<Piece> piece, unsigned int i)
+void ChessGameState::AddPiece(Piece* piece, unsigned int i)
 {
-    if (piece.get()->GetType() == Chess::Piece::kKing) 
+    if (piece->GetType() == Chess::Piece::kKing) 
     {
-        if (piece.get()->GetColor() == Chess::Color::kBlack) 
+        if (piece->GetColor() == Chess::Color::kBlack) 
         {
-            m_pBlackKing = dynamic_cast<King*>(piece.get());
+            m_pBlackKing = dynamic_cast<King*>(piece);
         }
         else 
         {
-            m_pWhiteKing = dynamic_cast<King*>(piece.get());
+            m_pWhiteKing = dynamic_cast<King*>(piece);
         }
     }
     m_pieces.push_back(std::move(piece));
-    m_squares[i].SetPiece(m_pieces.back().get());
+    m_squares[i].SetPiece(m_pieces.back());
 }
 
 Square& ChessGameState::GetSquare(unsigned int index)
@@ -78,7 +78,7 @@ void ChessGameState::RemovePiece(Piece* pPiece)
 {
     for (int i = 0; i < m_pieces.size(); ++i) 
     {
-        if (pPiece == m_pieces[i].get())
+        if (pPiece == m_pieces[i])
         {
             std::swap(m_pieces[i], m_pieces.back());
             m_pieces.pop_back();

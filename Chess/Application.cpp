@@ -54,6 +54,11 @@ void Application::Run()
     unsigned long long currentTick = SDL_GetPerformanceCounter();
     unsigned long long lastTick = 0;
 
+    int size = sizeof(ChessGameState) * 1000;
+    char* pool = new char[size];
+
+    //ChessGameState* pNewState = new(pool + sizeof(ChessGameState));
+
     m_ai.SetPlayerNumber(m_pBoard->StartGame());
     while (running) 
     {
@@ -91,6 +96,12 @@ void Application::Run()
         m_pBoard->Render(m_pRenderer.get()); 
         
         SDL_RenderPresent(m_pRenderer.get());
+
+        if (m_pBoard->CheckForGameEnd() != 0) 
+        {
+            std::cout << m_pBoard->CheckForGameEnd() << " Wins!" << std::endl;
+            running = false;
+        }
     }
 
     CleanUp();

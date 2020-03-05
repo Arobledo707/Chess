@@ -38,11 +38,11 @@ const Moves ChessBoard::GetAvailableMoves()
     Moves moves;
     for (auto& piece : m_currentState.GetPieces()) 
     {
-        if (piece.get()->GetColor() != m_currentTurn) 
+        if (piece->GetColor() != m_currentTurn) 
         {
             continue;
         }
-        Moves tempMoves = (piece.get()->GetAvailableMoves(&m_currentState));
+        Moves tempMoves = (piece->GetAvailableMoves(&m_currentState));
         for (Move& move : tempMoves) 
         {
             moves.push_back(move);
@@ -138,31 +138,31 @@ void ChessBoard::SpawnPieces()
         switch (i)
         {
         case 0:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Rook>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Rook>
                 (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Rook>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Rook>
                 (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
             break;
         case 1:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Knight>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Knight>
                 (m_textureManager.GetTexture(Chess::Piece::kKnight, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Knight>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Knight>
                 (m_textureManager.GetTexture(Chess::Piece::kKnight, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
             break;
         case 2:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Bishop>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Bishop>
                 (m_textureManager.GetTexture(Chess::Piece::kBishop, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Bishop>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Bishop>
                 (m_textureManager.GetTexture(Chess::Piece::kBishop, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
             break;
         case 3:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<King>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<King>
                 (m_textureManager.GetTexture(Chess::Piece::kKing, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Queen>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Queen>
                 (m_textureManager.GetTexture(Chess::Piece::kQueen, Chess::Color::kWhite), Chess::Color::kWhite, (Chess::kBoardWidth - 1) - i), (Chess::kBoardWidth - 1) - i);
         }
     }
@@ -175,31 +175,31 @@ void ChessBoard::SpawnPieces()
         switch (i)
         {
         case 56:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Rook>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Rook>
                 (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kBlack), Chess::Color::kBlack, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Rook>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Rook>
                 (m_textureManager.GetTexture(Chess::Piece::kRook, Chess::Color::kBlack), Chess::Color::kBlack, maxIndex - j), maxIndex - j);
             break;
         case 57:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Knight>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Knight>
                 (m_textureManager.GetTexture(Chess::Piece::kKnight, Chess::Color::kBlack), Chess::Color::kBlack, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Knight>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Knight>
                 (m_textureManager.GetTexture(Chess::Piece::kKnight, Chess::Color::kBlack), Chess::Color::kBlack, maxIndex - j), maxIndex - j);
             break;
         case 58:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Bishop>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Bishop>
                 (m_textureManager.GetTexture(Chess::Piece::kBishop, Chess::Color::kBlack), Chess::Color::kBlack, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Bishop>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Bishop>
                 (m_textureManager.GetTexture(Chess::Piece::kBishop, Chess::Color::kBlack), Chess::Color::kBlack, maxIndex - j), maxIndex - j);
             break;
         case 59:
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<King>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<King>
                 (m_textureManager.GetTexture(Chess::Piece::kKing, Chess::Color::kBlack), Chess::Color::kBlack, i), i);
 
-            m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Queen>
+            m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Queen>
                 (m_textureManager.GetTexture(Chess::Piece::kQueen, Chess::Color::kBlack), Chess::Color::kBlack, maxIndex - j), maxIndex - j);
         }
     }
@@ -212,14 +212,14 @@ void ChessBoard::SpawnPawns()
     unsigned int whitePawnIndexEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kWhitePawnColumn * Chess::kBoardWidth); i < whitePawnIndexEnd; ++i)
     {
-        m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Pawn>
+        m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Pawn>
             (m_textureManager.GetTexture(Chess::Piece::kPawn, Chess::Color::kWhite), Chess::Color::kWhite, i), i);
     }
 
     unsigned int blackPawnIndexEnd = (Chess::kBlackPawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kBlackPawnColumn * Chess::kBoardWidth); i < blackPawnIndexEnd; ++i)
     {
-        m_currentState.AddPiece(m_pieceFactory.get()->ReturnPiece<Pawn>
+        m_currentState.AddPiece(m_pieceFactory.ReturnPiece<Pawn>
             (m_textureManager.GetTexture(Chess::Piece::kPawn, Chess::Color::kBlack), Chess::Color::kBlack, i), i);
     }
 

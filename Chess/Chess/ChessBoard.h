@@ -33,7 +33,7 @@ private:
 private:
     ChessGameState m_currentState;
     SDLTextureManager m_textureManager;
-    std::unique_ptr<PieceFactory> m_pieceFactory;
+    PieceFactory m_pieceFactory;
     Piece* m_selectedPiece;
     Chess::Color m_currentTurn = Chess::Color::kWhite;
     Chess::Color m_playerColor;
