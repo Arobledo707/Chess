@@ -16,6 +16,15 @@ ChessGameState::ChessGameState()
     ResetBoard();
 }
 
+ChessGameState::~ChessGameState()
+{
+    for (Piece* piece : m_pieces) 
+    {
+        delete piece;
+        piece = nullptr;
+    }
+}
+
 ChessGameState::ChessGameState(const ChessGameState& state)
 {
     Copy(state);

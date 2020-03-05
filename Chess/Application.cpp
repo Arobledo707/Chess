@@ -108,9 +108,9 @@ void Application::Run()
 
 void Application::CleanUp()
 {
-    //todo call delete
-    //pieces
-    //board
+    delete m_pBoard;
+    m_pBoard = nullptr;
+
     TTF_Quit();
     SDL_Quit();
 }

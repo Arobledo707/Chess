@@ -13,6 +13,7 @@ class ChessGameState
 {
 public:
     ChessGameState();
+    ~ChessGameState();
     ChessGameState(const ChessGameState& state);
     ChessGameState& operator=(const ChessGameState& state);
 
