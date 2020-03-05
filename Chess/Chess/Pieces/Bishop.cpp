@@ -30,11 +30,11 @@ Moves Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }
-            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+            moves.push_back(std::pair<int, int>(m_index, currentIndex));
             currentIndex -= (Chess::kBoardWidth - 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kLeftSideRemainder)
@@ -56,11 +56,11 @@ Moves Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }
-            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+            moves.push_back(std::pair<int, int>(m_index, currentIndex));
             currentIndex += (Chess::kBoardWidth + 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kLeftSideRemainder)
@@ -88,11 +88,11 @@ Moves Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }
-            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+            moves.push_back(std::pair<int, int>(m_index, currentIndex));
             currentIndex -= (Chess::kBoardWidth + 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kRightSideRemainder)
@@ -114,11 +114,11 @@ Moves Bishop::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }
-            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+            moves.push_back(std::pair<int, int>(m_index, currentIndex));
             currentIndex += (Chess::kBoardWidth - 1);
             int currentRemainder = currentIndex % Chess::kBoardWidth;
             if (currentRemainder == Chess::kRightSideRemainder)

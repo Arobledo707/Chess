@@ -12,7 +12,6 @@ ChessGameState::ChessGameState()
     // CREATE PIECES
     // reset board can clear pieces then create them
     //m_textureManager.CreateTextures();
-    m_pieceFactory = std::make_unique<PieceFactory>();
     m_pieces.reserve(Chess::kChessPieces);
     ResetBoard();
 }
@@ -32,7 +31,7 @@ void ChessGameState::Copy(const ChessGameState& cgs)
 {
     memcpy(m_squares, cgs.m_squares, sizeof(Square) * Chess::kBoardSize);
     memcpy(&m_pieces, &cgs.m_pieces, sizeof(std::unique_ptr<Piece>)* cgs.m_pieces.size());
-    m_pieceFactory = std::make_unique<PieceFactory>();
+    m_pieceFactory = PieceFactory();
     m_pBlackKing = cgs.m_pBlackKing;
     m_pWhiteKing = cgs.m_pWhiteKing;
 
@@ -94,11 +93,7 @@ void ChessGameState::AddPiece()
 
 
 void ChessGameState::ResetBoard()
-{
-    //std::fill(&m_squares[0], &m_squares[0] + sizeof(m_squares)/sizeof(Square), Square());
-    //PieceFactory pf;
-    //pf.ReturnUnique<Pawn>();
-    
+{    
     Square::Color currentColor = Square::Color::Black;
     std::pair<char, int> currentId = std::make_pair('a', 1);
 

@@ -36,11 +36,11 @@ Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }
-            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+            moves.push_back(std::pair<int, int>(m_index, currentIndex));
         }
     }
 
@@ -59,11 +59,11 @@ Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }
-            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+            moves.push_back(std::pair<int, int>(m_index, currentIndex));
         }
     }
 
@@ -83,11 +83,11 @@ Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }
-            moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+            moves.push_back(std::pair<int, int>(m_index, currentIndex));
             if (currentIndex < Chess::kBoardWidth)
             {
                 break;
@@ -111,7 +111,7 @@ Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
                 }
                 else
                 {
-                    moves.push_back(std::pair<int, int>((int)GetColor(), currentIndex));
+                    moves.push_back(std::pair<int, int>(m_index, currentIndex));
                     break;
                 }
             }

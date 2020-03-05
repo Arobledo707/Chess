@@ -36,23 +36,32 @@ const int ChessBoard::GetCurrentPlayer() const
 const Moves ChessBoard::GetAvailableMoves()
 {
     Moves moves;
-    std::vector<std::unique_ptr<Piece>>& copy = m_currentState.GetPieces();
-    auto move = copy.front().get()->GetAvailableMoves(&m_currentState);
-    moves.push_back(move.front());
-    //for (auto& piece : m_currentState.GetPieces()) 
-    //{
-    //    Moves tempMoves = (piece.get()->GetAvailableMoves(&m_currentState));
-    //    for (Move& move : tempMoves) 
-    //    {
-    //        moves.push_back(move);
-    //    }
-    //}
+    for (auto& piece : m_currentState.GetPieces()) 
+    {
+        if (piece.get()->GetColor() != m_currentTurn) 
+        {
+            continue;
+        }
+        Moves tempMoves = (piece.get()->GetAvailableMoves(&m_currentState));
+        for (Move& move : tempMoves) 
+        {
+            moves.push_back(move);
+        }
+    }
     return moves;
 }
 
 void ChessBoard::MakeMove(Move move)
 {
     Piece* pPiece = m_currentState.GetSquare(move.second).GetPiece();
+    if (m_selectedPiece == nullptr) 
+    {
+        m_selectedPiece = m_currentState.GetSquare(move.first).GetPiece();
+        if (m_selectedPiece == nullptr) 
+        {
+            return;
+        }
+    }
 
     switch (m_selectedPiece->GetType())
     {
@@ -278,6 +287,10 @@ const bool ChessBoard::OnClick()
     m_selectedPiece = m_currentState.GetSquare(index).GetPiece();
     if (m_selectedPiece)
     {
+        if (m_selectedPiece->GetColor() != m_currentTurn)
+        {
+            return false;
+        }
         m_moves = m_selectedPiece->GetAvailableMoves(&m_currentState);
     }
 

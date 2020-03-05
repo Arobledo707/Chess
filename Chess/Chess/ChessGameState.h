@@ -29,7 +29,7 @@ public:
 private:
     Square m_squares[Chess::kBoardSize];
     std::vector<std::unique_ptr<Piece>> m_pieces;
-    std::unique_ptr<PieceFactory> m_pieceFactory;
+    PieceFactory m_pieceFactory;
     King* m_pWhiteKing = nullptr;
     King* m_pBlackKing = nullptr;
 };

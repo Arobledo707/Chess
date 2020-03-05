@@ -92,8 +92,6 @@ Node* MonteCarloTreeSearchAi::FindBestNodeUCT(Node* pNode)
     return pChosenNode;
 }
 
-
-
 void MonteCarloTreeSearchAi::ExpandNode(Node* pNode)
 {
     auto moves = pNode->GetState()->GetMoves();

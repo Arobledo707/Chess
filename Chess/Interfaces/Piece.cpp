@@ -47,7 +47,7 @@ void Piece::AddMoveIfValid(unsigned int index, Moves& moves, ChessGameState* pGa
     Piece* pPiece = pGameState->GetSquare(index).GetPiece();
     if (!(pPiece && pPiece->GetColor() == GetColor()))
     {
-        moves.push_back(std::pair<int, int>((int)GetColor(), index));
+        moves.push_back(std::pair<int, int>(m_index, index));
         CanCheck(pPiece);
     }
 }

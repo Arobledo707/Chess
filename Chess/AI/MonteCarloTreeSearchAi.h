@@ -1,4 +1,4 @@
-// MonteCarloTreeSearchAi.h
+    // MonteCarloTreeSearchAi.h
 #pragma once
 #include "../Chess/ChessBoard.h"
 #include "../Constants/Constants.h"
@@ -69,7 +69,7 @@ public:
     MonteCarloTreeSearchAi(Board* pBoard);
     Move FindBestMove();
     void SetBoard(Board* pBoard) { m_pBoard = pBoard; }
-    void SetPlayerNumber(int playerNumber);
+    void SetPlayerNumber(int playerNumber) { m_playerNumber = playerNumber; }
 private:
     double UctValue(int totalVisit, double nodeWinScore, int nodeVisit, double c = 1.4);
 

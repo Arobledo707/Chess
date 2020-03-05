@@ -31,18 +31,19 @@ bool Application::Initialize()
         return 1;
     }
     
-    m_pBoard = std::make_unique<ChessBoard>();
-    m_ai.SetBoard(m_pBoard.get());
+    m_pBoard = new ChessBoard();
+    m_ai.SetBoard(m_pBoard);
 
     return true;
-
 }
 
 void Application::Run()
 {
+    Initialize();
+
     assert(m_pRenderer.get());
     assert(m_pWindow.get());
-    assert(m_pBoard.get());
+    assert(m_pBoard);
 
     m_pBoard->Initialize(m_pRenderer.get());
 
@@ -53,8 +54,7 @@ void Application::Run()
     unsigned long long currentTick = SDL_GetPerformanceCounter();
     unsigned long long lastTick = 0;
 
-    m_pBoard->StartGame();
-
+    m_ai.SetPlayerNumber(m_pBoard->StartGame());
     while (running) 
     {
         lastTick = currentTick;
@@ -70,31 +70,30 @@ void Application::Run()
 
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                if (m_pBoard.get()->GetCurrentPlayer() == m_pBoard.get()->GetPlayerColor())
+                if (m_pBoard->GetCurrentPlayer() == m_pBoard->GetPlayerColor())
                 {
-                    m_pBoard.get()->OnClick();
+                    m_pBoard->OnClick();
                 }
                 break;
             default:
                 break;
             }
         }
-        if (m_pBoard.get()->GetCurrentPlayer() != m_pBoard.get()->GetPlayerColor())
+        if (m_pBoard->GetCurrentPlayer() != m_pBoard->GetPlayerColor())
         {
-            m_pBoard.get()->MakeMove(m_ai.FindBestMove());
+            m_pBoard->MakeMove(m_ai.FindBestMove());
             m_pBoard->AlternateTurns();
         }
 
 
         SDL_SetRenderDrawColor(m_pRenderer.get(), 150, 150, 150, 255);
         SDL_RenderClear(m_pRenderer.get());
-        m_pBoard.get()->Render(m_pRenderer.get()); 
+        m_pBoard->Render(m_pRenderer.get()); 
         
         SDL_RenderPresent(m_pRenderer.get());
     }
 
     CleanUp();
-
 }
 
 void Application::CleanUp()

@@ -24,7 +24,7 @@ Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)).GetPiece() == nullptr &&
         pGameState->GetSquare(m_index + ((Chess::kBoardWidth) * m_moveOffset)).GetPiece() == nullptr)
     {
-        moves.push_back(std::pair<int, int>((int)GetColor(), m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)));
+        moves.push_back(std::pair<int, int>(m_index, m_index + ((Chess::kBoardWidth * 2) * m_moveOffset)));
     }
     bool atTopRow = m_index < Chess::kBoardWidth;
     bool atBottomRow = m_index > ((Chess::kBoardSize) - 1) - Chess::kBoardWidth;
@@ -34,7 +34,7 @@ Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
         if (pGameState->GetSquare(m_index + (Chess::kBoardWidth * m_moveOffset)).GetPiece() == nullptr)
         {
             int move = m_index + (Chess::kBoardWidth * m_moveOffset);
-            moves.push_back(std::pair<int, int>((int)GetColor(), m_index + (Chess::kBoardWidth * m_moveOffset)));
+            moves.push_back(std::pair<int, int>(m_index, m_index + (Chess::kBoardWidth * m_moveOffset)));
         }
 
         unsigned int rightDiagonalIndex = m_index + (Chess::kBoardWidth * m_moveOffset) + 1;
@@ -46,7 +46,7 @@ Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
             if (pGameState->GetSquare(rightDiagonalIndex).GetPiece() != nullptr &&
                 pGameState->GetSquare(rightDiagonalIndex).GetPiece()->GetColor() != GetColor())
             {
-                moves.push_back(std::pair<int, int>((int)GetColor(), rightDiagonalIndex));
+                moves.push_back(std::pair<int, int>(m_index, rightDiagonalIndex));
             }
         }
         if (remainder != Chess::kLeftSideRemainder)
@@ -54,7 +54,7 @@ Moves Pawn::GetAvailableMoves(ChessGameState* pGameState)
             if (pGameState->GetSquare(leftDiagonalIndex).GetPiece() != nullptr &&
                 pGameState->GetSquare(leftDiagonalIndex).GetPiece()->GetColor() != GetColor())
             {
-                moves.push_back(std::pair<int, int>((int)GetColor(), leftDiagonalIndex));
+                moves.push_back(std::pair<int, int>(m_index, leftDiagonalIndex));
             }
         }
     }
