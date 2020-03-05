@@ -93,6 +93,7 @@ void ChessBoard::MakeMove(Move move)
     pSquare->SetPiece(m_selectedPiece);
     m_moves.clear();
     m_selectedPiece = nullptr;
+    m_pastMoves.push_back(move);
 }
 
 int ChessBoard::CheckForGameEnd() const
@@ -120,7 +121,6 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     {
         for (auto move : m_moves)
         {
-            SDL_SetRenderDrawBlendMode(pRenderer, SDL_BLENDMODE_BLEND);
             SDL_SetRenderDrawColor(pRenderer, 150, 0, 150, 128);
             SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move.second).GetRect());
         }

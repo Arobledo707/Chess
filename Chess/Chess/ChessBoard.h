@@ -27,6 +27,10 @@ public:
 
     
 private:
+    // Inherited via Board
+    virtual const int GetPlayerColor() const override;
+    virtual void AlternateTurns() override;
+
     void SpawnPieces();
     void SpawnPawns();
     void SoawnNonPawns(Chess::Color color, int maxIndex, int lowIndex);
@@ -39,14 +43,7 @@ private:
     Chess::Color m_currentTurn = Chess::Color::kWhite;
     Chess::Color m_playerColor;
     Moves m_moves{};
-
-
-    // Inherited via Board
-    virtual const int GetPlayerColor() const override;
-
-
-    // Inherited via Board
-    virtual void AlternateTurns() override;
+    Moves m_pastMoves{};
 
 };
 

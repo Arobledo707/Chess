@@ -30,7 +30,7 @@ bool Application::Initialize()
     {
         return 1;
     }
-    
+    SDL_SetRenderDrawBlendMode(m_pRenderer.get(), SDL_BLENDMODE_BLEND);
     m_pBoard = new ChessBoard();
     m_ai.SetBoard(m_pBoard);
 
