@@ -54,9 +54,8 @@ void Application::Run()
     unsigned long long currentTick = SDL_GetPerformanceCounter();
     unsigned long long lastTick = 0;
 
-    int size = sizeof(ChessGameState) * 1000;
-    char* pool = new char[size];
-
+    //int size = sizeof(ChessGameState) * 1000;
+    //char* pool = new char[size];
     //ChessGameState* pNewState = new(pool + sizeof(ChessGameState));
 
     m_ai.SetPlayerNumber(m_pBoard->StartGame());

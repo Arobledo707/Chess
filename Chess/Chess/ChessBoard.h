@@ -29,6 +29,7 @@ public:
 private:
     void SpawnPieces();
     void SpawnPawns();
+    void SoawnNonPawns(Chess::Color color, int maxIndex, int lowIndex);
     int AssignRoles();
 private:
     ChessGameState m_currentState;
