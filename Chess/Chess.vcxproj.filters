@@ -68,9 +68,6 @@
     <ClCompile Include="Chess\Pieces\Rook.cpp">
       <Filter>Chess\Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="Chess\Factory\PieceFactory.cpp">
-      <Filter>Chess\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="SDLTextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

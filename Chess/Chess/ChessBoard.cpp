@@ -1,6 +1,8 @@
 #include "ChessBoard.h"
 #include <SDL.h>
 #include <ctime>
+#include <conio.h>
+#include <cctype>
 
 ChessBoard::ChessBoard()
     : m_selectedPiece(nullptr)
@@ -36,14 +38,14 @@ const int ChessBoard::GetCurrentPlayer() const
 const Moves ChessBoard::GetAvailableMoves()
 {
     Moves moves;
-    for (auto& piece : m_currentState.GetPieces()) 
+    for (auto& piece : m_currentState.GetPieces())
     {
-        if (piece->GetColor() != m_currentTurn) 
+        if (piece->GetColor() != m_currentTurn)
         {
             continue;
         }
         Moves tempMoves = (piece->GetAvailableMoves(&m_currentState));
-        for (Move& move : tempMoves) 
+        for (Move& move : tempMoves)
         {
             moves.push_back(move);
         }
@@ -54,10 +56,10 @@ const Moves ChessBoard::GetAvailableMoves()
 void ChessBoard::MakeMove(Move move)
 {
     Piece* pPiece = m_currentState.GetSquare(move.second).GetPiece();
-    if (m_selectedPiece == nullptr) 
+    if (m_selectedPiece == nullptr)
     {
         m_selectedPiece = m_currentState.GetSquare(move.first).GetPiece();
-        if (m_selectedPiece == nullptr) 
+        if (m_selectedPiece == nullptr)
         {
             return;
         }
@@ -66,12 +68,12 @@ void ChessBoard::MakeMove(Move move)
     switch (m_selectedPiece->GetType())
     {
     case Chess::Piece::kKing:
-        if (pPiece) 
+        if (pPiece)
         {
             bool isSameColorRook = pPiece->GetColor() == m_selectedPiece->GetColor() &&
                 pPiece->GetType() == Chess::Piece::kRook;
 
-            if (((isSameColorRook && !m_selectedPiece->HasMoved() 
+            if (((isSameColorRook && !m_selectedPiece->HasMoved()
                 && !pPiece->HasMoved())))
             {
                 m_currentState.GetSquare(m_selectedPiece->GetIndex()).SetPiece(pPiece);
@@ -80,6 +82,13 @@ void ChessBoard::MakeMove(Move move)
             }
         }
     case Chess::Piece::kPawn:
+    {
+        int index = m_selectedPiece->GetIndex();
+        if (index < Chess::kBoardWidth || index > Chess::kBoardSize - Chess::kBoardWidth)
+        {
+            PromotePawn(m_selectedPiece);
+        }
+    }
     default:
         if (pPiece)
         {
@@ -127,6 +136,40 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     }
 }
 
+void ChessBoard::PromotePawn(Piece* pPiece)
+{
+    delete m_selectedPiece;
+    bool hasPicked = false;
+
+    while (!hasPicked)
+    {
+        char input = _getch();
+        input = std::toupper(input);
+        Chess::Piece type = Chess::Piece::kInvalid;
+        switch (input)
+        {
+            case static_cast<char>(Chess::Piece::kBishop) :
+                type = Chess::Piece::kBishop;
+                break;
+            case static_cast<char>(Chess::Piece::kKnight) :
+                type = Chess::Piece::kKnight;
+                break;
+            case static_cast<char>(Chess::Piece::kQueen) :
+                type = Chess::Piece::kQueen;
+                break;
+            case static_cast<char>(Chess::Piece::kRook) :
+                type = Chess::Piece::kRook;
+                break;
+        }
+
+        if (type != Chess::Piece::kInvalid)
+        {
+            m_currentState.ReplacePiece(m_selectedPiece, type, &m_textureManager);
+            hasPicked = true;
+        }
+    }
+}
+
 void ChessBoard::SpawnPieces()
 {
     SpawnPawns();
@@ -137,7 +180,7 @@ void ChessBoard::SpawnPieces()
 void ChessBoard::SpawnPawns()
 {
     //TODO interate through half and instantiate 2 pawns at once?
-//spawn white pawns
+    //spawn white pawns
     unsigned int whitePawnIndexEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kWhitePawnColumn * Chess::kBoardWidth); i < whitePawnIndexEnd; ++i)
     {
@@ -160,11 +203,11 @@ void ChessBoard::SpawnNonPawns(Chess::Color color, int maxIndex, int lowIndex)
 {
     for (int i = 0; i < Chess::kBoardWidth / 2; ++i)
     {
-        if (color == Chess::Color::kWhite) 
+        if (color == Chess::Color::kWhite)
         {
             lowIndex = i;
         }
-        else 
+        else
         {
             lowIndex = (Chess::kBoardWidth * Chess::kBlackPieceRow) + i;
         }
@@ -205,12 +248,12 @@ int ChessBoard::AssignRoles()
 {
     // if player is 0 then player is white
     int playerColor = std::rand() % 2;
-    if (playerColor == 0) 
+    if (playerColor == 0)
     {
         m_playerColor = Chess::Color::kWhite;
         return int(Chess::Color::kBlack);
     }
-    else 
+    else
     {
         m_playerColor = Chess::Color::kBlack;
         return int(Chess::Color::kWhite);
@@ -224,10 +267,10 @@ const int ChessBoard::GetPlayerColor() const
 
 void ChessBoard::AlternateTurns()
 {
-    if (m_currentTurn == Chess::Color::kBlack) 
+    if (m_currentTurn == Chess::Color::kBlack)
     {
         m_currentTurn = Chess::Color::kWhite;
-    } 
+    }
     else
     {
         m_currentTurn = Chess::Color::kBlack;

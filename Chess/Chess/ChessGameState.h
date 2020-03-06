@@ -23,7 +23,7 @@ public:
     void AddPiece(Piece* piece, unsigned int i);
     Square& GetSquare(unsigned int index);
     void RemovePiece(Piece* pPiece);
-    void AddPiece();
+    void ReplacePiece(Piece* pPiece, Chess::Piece type, SDLTextureManager* pTexManager);
     King* GetWhiteKing() const { return m_pWhiteKing; }
     King* GetBlackKing() const { return m_pBlackKing; }
     std::vector<Piece*>& GetPieces() { return m_pieces; }

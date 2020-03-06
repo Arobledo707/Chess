@@ -18,7 +18,7 @@ ChessGameState::ChessGameState()
 
 ChessGameState::~ChessGameState()
 {
-    for (Piece* piece : m_pieces) 
+    for (Piece* piece : m_pieces)
     {
         delete piece;
         piece = nullptr;
@@ -39,7 +39,7 @@ ChessGameState& ChessGameState::operator=(const ChessGameState& state)
 void ChessGameState::Copy(const ChessGameState& cgs)
 {
     memcpy(m_squares, cgs.m_squares, sizeof(Square) * Chess::kBoardSize);
-    memcpy(&m_pieces, &cgs.m_pieces, sizeof(std::unique_ptr<Piece>)* cgs.m_pieces.size());
+    memcpy(&m_pieces, &cgs.m_pieces, sizeof(std::unique_ptr<Piece>) * cgs.m_pieces.size());
     m_pieceFactory = PieceFactory();
     m_pBlackKing = cgs.m_pBlackKing;
     m_pWhiteKing = cgs.m_pWhiteKing;
@@ -49,12 +49,12 @@ void ChessGameState::Copy(const ChessGameState& cgs)
 
 void ChessGameState::Render(SDL_Renderer* pRenderer)
 {
-    for (const Square& square: m_squares) 
+    for (const Square& square : m_squares)
     {
         square.Render(pRenderer);
     }
 
-    for (const auto& piece: m_pieces) 
+    for (const auto& piece : m_pieces)
     {
         piece->Render(pRenderer);
     }
@@ -63,13 +63,13 @@ void ChessGameState::Render(SDL_Renderer* pRenderer)
 
 void ChessGameState::AddPiece(Piece* piece, unsigned int i)
 {
-    if (piece->GetType() == Chess::Piece::kKing) 
+    if (piece->GetType() == Chess::Piece::kKing)
     {
-        if (piece->GetColor() == Chess::Color::kBlack) 
+        if (piece->GetColor() == Chess::Color::kBlack)
         {
             m_pBlackKing = dynamic_cast<King*>(piece);
         }
-        else 
+        else
         {
             m_pWhiteKing = dynamic_cast<King*>(piece);
         }
@@ -85,17 +85,17 @@ Square& ChessGameState::GetSquare(unsigned int index)
 
 void ChessGameState::RemovePiece(Piece* pPiece)
 {
-    for (int i = 0; i < m_pieces.size(); ++i) 
+    for (int i = 0; i < m_pieces.size(); ++i)
     {
         if (pPiece == m_pieces[i])
         {
-            if (pPiece->GetType() == Chess::Piece::kKing) 
+            if (pPiece->GetType() == Chess::Piece::kKing)
             {
-                if (pPiece->GetColor() == Chess::Color::kWhite) 
+                if (pPiece->GetColor() == Chess::Color::kWhite)
                 {
                     m_pWhiteKing = nullptr;
                 }
-                else 
+                else
                 {
                     m_pBlackKing = nullptr;
                 }
@@ -109,13 +109,38 @@ void ChessGameState::RemovePiece(Piece* pPiece)
     }
 }
 
-void ChessGameState::AddPiece()
+void ChessGameState::ReplacePiece(Piece* pPiece, Chess::Piece type, SDLTextureManager* pTexManager)
 {
+    assert(pPiece);
+    Piece* pNewPiece = nullptr;
+    switch (type)
+    {
+    case Chess::Piece::kKnight:
+        pNewPiece = m_pieceFactory.ReturnPiece<Knight>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        break;
+    case Chess::Piece::kBishop:
+        pNewPiece = m_pieceFactory.ReturnPiece<Bishop>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        break;
+    case Chess::Piece::kRook:
+        pNewPiece = m_pieceFactory.ReturnPiece<Rook>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        break;
+    case Chess::Piece::kQueen:
+        pNewPiece = m_pieceFactory.ReturnPiece<Queen>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        break;
+    default:
+        std::cout << "Error: AddPiece type was not valid" << std::endl;
+        break;
+    }
+    delete pPiece;
+    if (pNewPiece)
+    {
+        *pPiece = *pNewPiece;
+    }
 }
 
 
 void ChessGameState::ResetBoard()
-{    
+{
     Square::Color currentColor = Square::Color::Black;
     std::pair<char, int> currentId = std::make_pair('a', 1);
 

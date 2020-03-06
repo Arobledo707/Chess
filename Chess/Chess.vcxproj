@@ -158,7 +158,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Chess\ChessBoard.cpp" />
     <ClCompile Include="Chess\ChessGameState.cpp" />
-    <ClCompile Include="Chess\Factory\PieceFactory.cpp" />
     <ClCompile Include="Chess\Pieces\Bishop.cpp" />
     <ClCompile Include="Chess\Pieces\King.cpp" />
     <ClCompile Include="Chess\Pieces\Knight.cpp" />
