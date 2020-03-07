@@ -83,11 +83,12 @@ void ChessBoard::MakeMove(Move move)
         }
     case Chess::Piece::kPawn:
     {
-        int index = m_selectedPiece->GetIndex();
+        int index = move.second;
         if (index < Chess::kBoardWidth || index > Chess::kBoardSize - Chess::kBoardWidth)
         {
             PromotePawn(m_selectedPiece);
         }
+        //break;
     }
     default:
         if (pPiece)
@@ -140,34 +141,36 @@ void ChessBoard::PromotePawn(Piece* pPiece)
 {
     delete m_selectedPiece;
     bool hasPicked = false;
-
-    while (!hasPicked)
-    {
-        char input = _getch();
-        input = std::toupper(input);
-        Chess::Piece type = Chess::Piece::kInvalid;
-        switch (input)
-        {
-            case static_cast<char>(Chess::Piece::kBishop) :
-                type = Chess::Piece::kBishop;
-                break;
-            case static_cast<char>(Chess::Piece::kKnight) :
-                type = Chess::Piece::kKnight;
-                break;
-            case static_cast<char>(Chess::Piece::kQueen) :
-                type = Chess::Piece::kQueen;
-                break;
-            case static_cast<char>(Chess::Piece::kRook) :
-                type = Chess::Piece::kRook;
-                break;
-        }
+    Chess::Piece type = Chess::Piece::kQueen;
+    //if (m_playerColor == m_currentTurn)
+    //{
+        //while (!hasPicked)
+        //{
+        //    char input = _getch();
+        //    input = std::toupper(input);
+        //    switch (input)
+        //    {
+        //        case static_cast<char>(Chess::Piece::kBishop) :
+        //            type = Chess::Piece::kBishop;
+        //            break;
+        //        case static_cast<char>(Chess::Piece::kKnight) :
+        //            type = Chess::Piece::kKnight;
+        //            break;
+        //        case static_cast<char>(Chess::Piece::kQueen) :
+        //            type = Chess::Piece::kQueen;
+        //            break;
+        //        case static_cast<char>(Chess::Piece::kRook) :
+        //            type = Chess::Piece::kRook;
+        //            break;
+        //    }
+        //}
 
         if (type != Chess::Piece::kInvalid)
         {
             m_currentState.ReplacePiece(m_selectedPiece, type, &m_textureManager);
             hasPicked = true;
         }
-    }
+    //}
 }
 
 void ChessBoard::SpawnPieces()
@@ -199,6 +202,7 @@ void ChessBoard::SpawnPawns()
     unsigned int whitePawnPiecesEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
 }
 
+// terrible function name but this spawns rooks, knights, bishops, king and queen
 void ChessBoard::SpawnNonPawns(Chess::Color color, int maxIndex, int lowIndex)
 {
     for (int i = 0; i < Chess::kBoardWidth / 2; ++i)
