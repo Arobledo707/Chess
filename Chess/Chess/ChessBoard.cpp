@@ -131,7 +131,7 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     {
         for (auto move : m_moves)
         {
-            SDL_SetRenderDrawColor(pRenderer, 150, 0, 150, 128);
+            SDL_SetRenderDrawColor(pRenderer, Chess::kPurple.r, Chess::kPurple.g, Chess::kPurple.b, Chess::kPurple.a);
             SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move.second).GetRect());
         }
     }

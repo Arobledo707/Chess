@@ -18,11 +18,11 @@ std::shared_ptr<SDL_Texture> SDLTextManager::GetTexture(Chess::Piece piece, Ches
         SDL_Color pieceColor;
         if (color == Chess::Color::kBlack) 
         {
-            pieceColor = kBlack;
+            pieceColor = Chess::kBlackPiece;
         }
         else
         {
-            pieceColor = kWhite;
+            pieceColor = Chess::kWhitePiece;
         }
 
     //    //this?????????????????????????????????
@@ -52,7 +52,3 @@ bool SDLTextManager::LoadFont()
     return false;
 }
 
-std::shared_ptr<SDL_Texture> SDLTextManager::CreateTexture()
-{
-    return std::shared_ptr<SDL_Texture>();
-}

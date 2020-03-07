@@ -15,13 +15,19 @@ namespace Chess
     static constexpr unsigned int kLeftSideRemainder = 0;
     static constexpr unsigned int kRightSideRemainder = 7;
 
-    enum class Color : char 
+    enum class Color : char
     {
         kWhite = 'W',
         kBlack = 'B',
     };
 
-    enum class Piece : char 
+    constexpr SDL_Color kBlackSquare { 200, 200, 200, 255 };
+    constexpr SDL_Color kWhiteSquare { 100, 100, 100, 255 };
+    constexpr SDL_Color kPurple { 150, 0, 150, 128 };
+    constexpr SDL_Color kBlackPiece { 10, 10, 10, 0 };
+    constexpr SDL_Color kWhitePiece { 500, 500, 500, 0 };
+
+    enum class Piece : char
     {
         kPawn = 'P',
         kKnight = 'N',
@@ -32,7 +38,8 @@ namespace Chess
         kInvalid = 'I'
     };
 
-    static bool IsValidIndex(int index) {return index >= 0 && index <= (Chess::kBoardSize - 1);
+    static bool IsValidIndex(int index) {
+        return index >= 0 && index <= (Chess::kBoardSize - 1);
     }
 };
 
