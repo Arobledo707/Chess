@@ -17,7 +17,5 @@ private:
     bool LoadFont();
     std::unique_ptr<TTF_Font, decltype(&TTF_CloseFont)> m_pFont;
     std::unordered_map<char, std::shared_ptr<SDL_Texture>> m_textures;
-    
-    static constexpr SDL_Rect kTextRect { 0, 0, 75, 75};
 };
 
