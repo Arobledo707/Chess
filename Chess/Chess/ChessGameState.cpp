@@ -131,7 +131,7 @@ void ChessGameState::ReplacePiece(Piece* pPiece, Chess::Piece type, SDLTextureMa
         std::cout << "Error: AddPiece type was not valid" << std::endl;
         break;
     }
-    delete pPiece;
+    //delete pPiece;
     if (pNewPiece)
     {
         *pPiece = *pNewPiece;
