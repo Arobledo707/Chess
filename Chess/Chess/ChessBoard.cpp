@@ -141,35 +141,36 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
 void ChessBoard::PromotePawn()
 {
     bool hasPicked = false;
-    Chess::Piece type = Chess::Piece::kQueen;
+    Chess::Piece type = Chess::Piece::kInvalid;
     //if (m_playerColor == m_currentTurn)
     //{
-        //while (!hasPicked)
-        //{
-        //    char input = _getch();
-        //    input = std::toupper(input);
-        //    switch (input)
-        //    {
-        //        case static_cast<char>(Chess::Piece::kBishop) :
-        //            type = Chess::Piece::kBishop;
-        //            break;
-        //        case static_cast<char>(Chess::Piece::kKnight) :
-        //            type = Chess::Piece::kKnight;
-        //            break;
-        //        case static_cast<char>(Chess::Piece::kQueen) :
-        //            type = Chess::Piece::kQueen;
-        //            break;
-        //        case static_cast<char>(Chess::Piece::kRook) :
-        //            type = Chess::Piece::kRook;
-        //            break;
-        //    }
-        //}
-
-        if (type != Chess::Piece::kInvalid)
+        while (!hasPicked)
         {
-            m_currentState.ReplacePiece(m_selectedPiece, type, &m_textureManager);
-            hasPicked = true;
+            char input = _getch();
+            input = std::toupper(input);
+            switch (input)
+            {
+                case static_cast<char>(Chess::Piece::kBishop) :
+                    type = Chess::Piece::kBishop;
+                    break;
+                case static_cast<char>(Chess::Piece::kKnight) :
+                    type = Chess::Piece::kKnight;
+                    break;
+                case static_cast<char>(Chess::Piece::kQueen) :
+                    type = Chess::Piece::kQueen;
+                    break;
+                case static_cast<char>(Chess::Piece::kRook) :
+                    type = Chess::Piece::kRook;
+                    break;
+            }
+
+            if (type != Chess::Piece::kInvalid)
+            {
+                m_currentState.ReplacePiece(m_selectedPiece, type, &m_textureManager);
+                hasPicked = true;
+            }
         }
+
     //}
 }
 
@@ -182,7 +183,6 @@ void ChessBoard::SpawnPieces()
 
 void ChessBoard::SpawnPawns()
 {
-    //TODO interate through half and instantiate 2 pawns at once?
     //spawn white pawns
     unsigned int whitePawnIndexEnd = (Chess::kWhitePawnColumn * Chess::kBoardWidth) + Chess::kBoardWidth;
     for (unsigned int i = (Chess::kWhitePawnColumn * Chess::kBoardWidth); i < whitePawnIndexEnd; ++i)

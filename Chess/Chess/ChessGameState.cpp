@@ -135,11 +135,8 @@ void ChessGameState::ReplacePiece(Piece* pPiece, Chess::Piece type, SDLTextureMa
     }
     if (pNewPiece)
     {
-        //delete pPiece;
-        //pPiece = nullptr;
         RemovePiece(pPiece);
         AddPiece(pNewPiece, index);
-        //pPiece = std::move(pNewPiece);
     }
 }
 
