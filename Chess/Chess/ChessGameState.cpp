@@ -113,28 +113,33 @@ void ChessGameState::ReplacePiece(Piece* pPiece, Chess::Piece type, SDLTextureMa
 {
     assert(pPiece);
     Piece* pNewPiece = nullptr;
+    int index = pPiece->GetIndex();
+    Chess::Color color = pPiece->GetColor();
     switch (type)
     {
     case Chess::Piece::kKnight:
-        pNewPiece = m_pieceFactory.ReturnPiece<Knight>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        pNewPiece = m_pieceFactory.ReturnPiece<Knight>(pTexManager->GetTexture(type, color), color, index);
         break;
     case Chess::Piece::kBishop:
-        pNewPiece = m_pieceFactory.ReturnPiece<Bishop>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        pNewPiece = m_pieceFactory.ReturnPiece<Bishop>(pTexManager->GetTexture(type, color), color, index);
         break;
     case Chess::Piece::kRook:
-        pNewPiece = m_pieceFactory.ReturnPiece<Rook>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        pNewPiece = m_pieceFactory.ReturnPiece<Rook>(pTexManager->GetTexture(type, color), color, index);
         break;
     case Chess::Piece::kQueen:
-        pNewPiece = m_pieceFactory.ReturnPiece<Queen>(pTexManager->GetTexture(type, pPiece->GetColor()), pPiece->GetColor(), pPiece->GetIndex());
+        pNewPiece = m_pieceFactory.ReturnPiece<Queen>(pTexManager->GetTexture(type, color), color, index);
         break;
     default:
         std::cout << "Error: AddPiece type was not valid" << std::endl;
         break;
     }
-    //delete pPiece;
     if (pNewPiece)
     {
-        *pPiece = *pNewPiece;
+        //delete pPiece;
+        //pPiece = nullptr;
+        RemovePiece(pPiece);
+        AddPiece(pNewPiece, index);
+        //pPiece = std::move(pNewPiece);
     }
 }
 

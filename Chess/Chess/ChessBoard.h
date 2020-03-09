@@ -31,7 +31,7 @@ private:
     virtual const int GetPlayerColor() const override;
     virtual void AlternateTurns() override;
 
-    void PromotePawn(Piece* pPiece);
+    void PromotePawn();
     void SpawnPieces();
     void SpawnPawns();
     void SpawnNonPawns(Chess::Color color, int maxIndex, int lowIndex);

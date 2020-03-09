@@ -86,7 +86,8 @@ void ChessBoard::MakeMove(Move move)
         int index = move.second;
         if (index < Chess::kBoardWidth || index > Chess::kBoardSize - Chess::kBoardWidth)
         {
-            PromotePawn(m_selectedPiece);
+            PromotePawn();
+            m_selectedPiece = m_currentState.GetPieces().back();
         }
         //break;
     }
@@ -137,9 +138,8 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     }
 }
 
-void ChessBoard::PromotePawn(Piece* pPiece)
+void ChessBoard::PromotePawn()
 {
-    delete m_selectedPiece;
     bool hasPicked = false;
     Chess::Piece type = Chess::Piece::kQueen;
     //if (m_playerColor == m_currentTurn)

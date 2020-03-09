@@ -23,6 +23,11 @@ Piece& Piece::operator=(const Piece& piece)
     return (*this);
 }
 
+Piece& Piece::operator=(Piece&& piece)
+{
+     return (piece);
+}
+
 void Piece::Move(unsigned int move)
 {
     assert(Chess::IsValidIndex(move));

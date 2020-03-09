@@ -18,6 +18,7 @@ public:
 
     Piece(const Piece& piece);
     Piece& operator=(const Piece& piece);
+    Piece& operator=(Piece&& piece);
 
     virtual void Move(unsigned int move);
     void Render(SDL_Renderer* pRenderer) { SDL_RenderCopy(pRenderer, GetTexture(), NULL, &GetRect()); }
