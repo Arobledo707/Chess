@@ -90,6 +90,9 @@ void Application::Run()
                 case SDLK_q:
                     type = Chess::Piece::kQueen;
                     break;
+                case SDLK_ESCAPE:
+                    running = false;
+                    break;
                 }
                 if (type != Chess::Piece::kInvalid)
                 {
