@@ -89,7 +89,6 @@ void ChessBoard::MakeMove(Move move)
             PromotePawn();
             m_selectedPiece = m_currentState.GetPieces().back();
         }
-        //break;
     }
     default:
         if (pPiece)
@@ -138,40 +137,16 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     }
 }
 
-void ChessBoard::PromotePawn()
+void ChessBoard::PromotePawn(Chess::Piece piece)
 {
     bool hasPicked = false;
     Chess::Piece type = Chess::Piece::kInvalid;
-    //if (m_playerColor == m_currentTurn)
-    //{
-        while (!hasPicked)
-        {
-            char input = _getch();
-            input = std::toupper(input);
-            switch (input)
-            {
-                case static_cast<char>(Chess::Piece::kBishop) :
-                    type = Chess::Piece::kBishop;
-                    break;
-                case static_cast<char>(Chess::Piece::kKnight) :
-                    type = Chess::Piece::kKnight;
-                    break;
-                case static_cast<char>(Chess::Piece::kQueen) :
-                    type = Chess::Piece::kQueen;
-                    break;
-                case static_cast<char>(Chess::Piece::kRook) :
-                    type = Chess::Piece::kRook;
-                    break;
-            }
 
-            if (type != Chess::Piece::kInvalid)
-            {
-                m_currentState.ReplacePiece(m_selectedPiece, type, &m_textureManager);
-                hasPicked = true;
-            }
-        }
-
-    //}
+    if (type != Chess::Piece::kInvalid)
+    {
+        m_currentState.ReplacePiece(m_selectedPiece, type, &m_textureManager);
+        hasPicked = true;
+    }
 }
 
 void ChessBoard::SpawnPieces()

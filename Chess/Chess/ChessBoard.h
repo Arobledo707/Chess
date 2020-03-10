@@ -24,14 +24,12 @@ public:
     virtual void Render(SDL_Renderer* pRenderer) override;
     virtual Board* CloneSelf() const override;
     virtual const bool OnClick() override;
-
+    void PromotePawn(Chess::Piece piece);
     
 private:
     // Inherited via Board
     virtual const int GetPlayerColor() const override;
     virtual void AlternateTurns() override;
-
-    void PromotePawn();
     void SpawnPieces();
     void SpawnPawns();
     void SpawnNonPawns(Chess::Color color, int maxIndex, int lowIndex);

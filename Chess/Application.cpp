@@ -67,13 +67,31 @@ void Application::Run()
             {
             case SDL_QUIT:
                 running = false;
-
                 break;
             case SDL_MOUSEBUTTONDOWN:
                // if (m_pBoard->GetCurrentPlayer() == m_pBoard->GetPlayerColor())
                 //{
                     m_pBoard->OnClick();
                 //}
+                break;
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym) 
+                {
+                case SDLK_b:
+                    break;
+                case SDLK_n:
+                    break;
+                case SDLK_r:
+                    break;
+                case SDLK_q:
+                    break;
+                    if (true) 
+                    {
+                        ChessBoard* pChessboard = static_cast<ChessBoard*>(m_pBoard);
+                        Chess::Piece type;
+                        pChessboard->PromotePawn(type);
+                    }
+                }
                 break;
             default:
                 break;
