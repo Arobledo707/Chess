@@ -5,7 +5,7 @@
 #include <cctype>
 
 ChessBoard::ChessBoard()
-    : m_selectedPiece(nullptr)
+    : m_selectedPiece(nullptr), m_pPieceToPromote(nullptr)
 {
     std::srand(std::time(nullptr));
 }
@@ -86,8 +86,7 @@ void ChessBoard::MakeMove(Move move)
         int index = move.second;
         if (index < Chess::kBoardWidth || index > Chess::kBoardSize - Chess::kBoardWidth)
         {
-            PromotePawn();
-            m_selectedPiece = m_currentState.GetPieces().back();
+            m_pPieceToPromote = m_selectedPiece;
         }
     }
     default:
@@ -137,16 +136,14 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
     }
 }
 
-void ChessBoard::PromotePawn(Chess::Piece piece)
+void ChessBoard::PromotePawn(Chess::Piece type, Piece* pPiece)
 {
-    bool hasPicked = false;
-    Chess::Piece type = Chess::Piece::kInvalid;
-
     if (type != Chess::Piece::kInvalid)
     {
-        m_currentState.ReplacePiece(m_selectedPiece, type, &m_textureManager);
-        hasPicked = true;
+        m_currentState.ReplacePiece(pPiece, type, &m_textureManager);
     }
+    m_pPieceToPromote = nullptr;
+
 }
 
 void ChessBoard::SpawnPieces()
@@ -292,6 +289,14 @@ const bool ChessBoard::OnClick()
     }
 
     return false;
+}
+
+void ChessBoard::CheckIfPromote(Chess::Piece type)
+{
+    if (m_pPieceToPromote)
+    {
+        PromotePawn(type, m_pPieceToPromote);
+    }
 }
 
 Board* ChessBoard::CloneSelf() const

@@ -19,14 +19,14 @@ Application::Application()
 bool Application::Initialize()
 {
     //std::experimental::filesystem::v1::
-    if (0 != SDL_Init(SDL_INIT_VIDEO)) 
+    if (0 != SDL_Init(SDL_INIT_VIDEO))
     {
         return 1;
     }
     m_pWindow.reset(SDL_CreateWindow(kWindowName, 100, 100, kWindowWidth, kWindowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE));
     m_pRenderer.reset(SDL_CreateRenderer(m_pWindow.get(), -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED));
 
-    if (TTF_Init() != 0) 
+    if (TTF_Init() != 0)
     {
         return 1;
     }
@@ -55,45 +55,47 @@ void Application::Run()
     unsigned long long lastTick = 0;
 
     m_ai.SetPlayerNumber(m_pBoard->StartGame());
-    while (running) 
+    while (running)
     {
         lastTick = currentTick;
         currentTick = SDL_GetPerformanceCounter();
         deltaSeconds = ((currentTick - lastTick) / (double)SDL_GetPerformanceCounter());
 
-        while (SDL_PollEvent(&event)) 
+        while (SDL_PollEvent(&event))
         {
-            switch (event.type) 
+            switch (event.type)
             {
             case SDL_QUIT:
                 running = false;
                 break;
             case SDL_MOUSEBUTTONDOWN:
-               // if (m_pBoard->GetCurrentPlayer() == m_pBoard->GetPlayerColor())
-                //{
-                    m_pBoard->OnClick();
+                // if (m_pBoard->GetCurrentPlayer() == m_pBoard->GetPlayerColor())
+                 //{
+                m_pBoard->OnClick();
                 //}
                 break;
             case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) 
+                Chess::Piece type = Chess::Piece::kInvalid;
+                switch (event.key.keysym.sym)
                 {
                 case SDLK_b:
+                    type = Chess::Piece::kBishop;
                     break;
                 case SDLK_n:
+                    type = Chess::Piece::kKnight;
                     break;
                 case SDLK_r:
+                    type = Chess::Piece::kRook;
                     break;
                 case SDLK_q:
+                    type = Chess::Piece::kQueen;
                     break;
-                    if (true) 
-                    {
-                        ChessBoard* pChessboard = static_cast<ChessBoard*>(m_pBoard);
-                        Chess::Piece type;
-                        pChessboard->PromotePawn(type);
-                    }
                 }
-                break;
-            default:
+                if (type != Chess::Piece::kInvalid)
+                {
+                    ChessBoard* pChessboard = static_cast<ChessBoard*>(m_pBoard);
+                    pChessboard->CheckIfPromote(type);
+                }
                 break;
             }
         }
@@ -106,11 +108,11 @@ void Application::Run()
 
         SDL_SetRenderDrawColor(m_pRenderer.get(), 150, 150, 150, 255);
         SDL_RenderClear(m_pRenderer.get());
-        m_pBoard->Render(m_pRenderer.get()); 
-        
+        m_pBoard->Render(m_pRenderer.get());
+
         SDL_RenderPresent(m_pRenderer.get());
 
-        if (m_pBoard->CheckForGameEnd() != 0) 
+        if (m_pBoard->CheckForGameEnd() != 0)
         {
             std::cout << m_pBoard->CheckForGameEnd() << " Wins!" << std::endl;
             running = false;

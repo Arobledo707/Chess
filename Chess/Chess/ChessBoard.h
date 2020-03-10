@@ -24,7 +24,8 @@ public:
     virtual void Render(SDL_Renderer* pRenderer) override;
     virtual Board* CloneSelf() const override;
     virtual const bool OnClick() override;
-    void PromotePawn(Chess::Piece piece);
+    void CheckIfPromote(Chess::Piece type);
+    void PromotePawn(Chess::Piece type, Piece* pPiece);
     
 private:
     // Inherited via Board
@@ -39,6 +40,7 @@ private:
     SDLTextureManager m_textureManager;
     PieceFactory m_pieceFactory;
     Piece* m_selectedPiece;
+    Piece* m_pPieceToPromote;
     Chess::Color m_currentTurn = Chess::Color::kWhite;
     Chess::Color m_playerColor;
     Moves m_moves{};
