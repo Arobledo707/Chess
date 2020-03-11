@@ -6,7 +6,7 @@ namespace Chess
     static constexpr unsigned int kSquareWidth = 75;
     static constexpr unsigned int kBoardHeight = 8;
     static constexpr unsigned int kBoardWidth = 8;
-    static constexpr size_t kBoardSize = kBoardHeight * kBoardWidth;
+    static constexpr unsigned int kBoardSize = kBoardHeight * kBoardWidth;
     static constexpr unsigned int kChessPieces = 32;
     static constexpr unsigned int kBlackPawnColumn = 6;
     static constexpr unsigned int kWhitePawnColumn = 1;
@@ -19,13 +19,14 @@ namespace Chess
     {
         kWhite = 'W',
         kBlack = 'B',
+        kInvalid = 'I',
     };
 
-    constexpr SDL_Color kBlackSquare { 200, 200, 200, 255 };
-    constexpr SDL_Color kWhiteSquare { 100, 100, 100, 255 };
-    constexpr SDL_Color kPurple { 150, 0, 150, 128 };
-    constexpr SDL_Color kBlackPiece { 10, 10, 10, 0 };
-    constexpr SDL_Color kWhitePiece { 500, 500, 500, 0 };
+    static constexpr SDL_Color kBlackSquare { 200, 200, 200, 255 };
+    static constexpr SDL_Color kWhiteSquare { 100, 100, 100, 255 };
+    static constexpr SDL_Color kPurple { 150, 0, 150, 128 };
+    static constexpr SDL_Color kBlackPiece { 10, 10, 10, 0 };
+    static constexpr SDL_Color kWhitePiece { 500, 500, 500, 0 };
 
     enum class Piece : char
     {

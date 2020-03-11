@@ -5,6 +5,7 @@
 #include "../Chess/Factory/PieceFactory.h"
 #include "../Chess/Pieces/Pawn.h"
 #include "../Constants/ChessConstants.h"
+#include "../Interfaces/Piece.h"
 
 ChessGameState::ChessGameState()
 {
@@ -40,7 +41,6 @@ void ChessGameState::Copy(const ChessGameState& cgs)
 {
     memcpy(m_squares, cgs.m_squares, sizeof(Square) * Chess::kBoardSize);
     memcpy(&m_pieces, &cgs.m_pieces, sizeof(std::unique_ptr<Piece>) * cgs.m_pieces.size());
-    m_pieceFactory = PieceFactory();
     m_pBlackKing = cgs.m_pBlackKing;
     m_pWhiteKing = cgs.m_pWhiteKing;
 
@@ -85,7 +85,7 @@ Square& ChessGameState::GetSquare(unsigned int index)
 
 void ChessGameState::RemovePiece(Piece* pPiece)
 {
-    for (int i = 0; i < m_pieces.size(); ++i)
+    for (unsigned int i = 0U; i < m_pieces.size(); ++i)
     {
         if (pPiece == m_pieces[i])
         {
@@ -115,19 +115,20 @@ void ChessGameState::ReplacePiece(Piece* pPiece, Chess::Piece type, SDLTextureMa
     Piece* pNewPiece = nullptr;
     int index = pPiece->GetIndex();
     Chess::Color color = pPiece->GetColor();
+    PieceFactory peaceFactory;
     switch (type)
     {
     case Chess::Piece::kKnight:
-        pNewPiece = m_pieceFactory.ReturnPiece<Knight>(pTexManager->GetTexture(type, color), color, index);
+        pNewPiece = peaceFactory.ReturnPiece<Knight>(pTexManager->GetTexture(type, color), color, index);
         break;
     case Chess::Piece::kBishop:
-        pNewPiece = m_pieceFactory.ReturnPiece<Bishop>(pTexManager->GetTexture(type, color), color, index);
+        pNewPiece = peaceFactory.ReturnPiece<Bishop>(pTexManager->GetTexture(type, color), color, index);
         break;
     case Chess::Piece::kRook:
-        pNewPiece = m_pieceFactory.ReturnPiece<Rook>(pTexManager->GetTexture(type, color), color, index);
+        pNewPiece = peaceFactory.ReturnPiece<Rook>(pTexManager->GetTexture(type, color), color, index);
         break;
     case Chess::Piece::kQueen:
-        pNewPiece = m_pieceFactory.ReturnPiece<Queen>(pTexManager->GetTexture(type, color), color, index);
+        pNewPiece = peaceFactory.ReturnPiece<Queen>(pTexManager->GetTexture(type, color), color, index);
         break;
     default:
         std::cout << "Error: AddPiece type was not valid" << std::endl;

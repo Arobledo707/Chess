@@ -1,5 +1,7 @@
 #include "Knight.h"
 #include "../ChessGameState.h"
+#include <cassert>
+
 
 Knight::Knight(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
     :Piece(pTexture, color, index, Chess::Piece::kKnight)

@@ -38,7 +38,6 @@ private:
 private:
     ChessGameState m_currentState;
     SDLTextureManager m_textureManager;
-    PieceFactory m_pieceFactory;
     Piece* m_selectedPiece;
     Piece* m_pPieceToPromote;
     Chess::Color m_currentTurn = Chess::Color::kWhite;

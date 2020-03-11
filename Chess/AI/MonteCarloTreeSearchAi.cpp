@@ -96,7 +96,7 @@ void MonteCarloTreeSearchAi::ExpandNode(Node* pNode)
 {
     auto moves = pNode->GetState()->GetMoves();
 
-    for (int i = 0; i < moves.size(); ++i) 
+    for (unsigned int i = 0U; i < moves.size(); ++i) 
     {
         Board* pNewBoard = pNode->GetState()->GetBoard()->CloneSelf();
         State* newState = new State(pNewBoard, m_playerNumber);

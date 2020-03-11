@@ -2,6 +2,7 @@
 #include "../Chess/ChessGameState.h"
 #include <cassert>
 #include <iostream>
+#include "../Chess/Pieces/King.h"
 
 Piece::Piece(const Piece& piece)
     : m_color(piece.m_color)

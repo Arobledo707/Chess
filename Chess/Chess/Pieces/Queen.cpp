@@ -1,5 +1,5 @@
 #include "Queen.h"
-
+#include <cassert>
 #include "../ChessGameState.h"
 
 Queen::Queen(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
@@ -19,7 +19,7 @@ Moves Queen::GetAvailableMoves(ChessGameState* pGameState)
 
     //horizontal moves
     // if the remainder isnt 0 then we can move left
-    int remainder = m_index % Chess::kBoardWidth;
+    unsigned int remainder = m_index % Chess::kBoardWidth;
     if (remainder != Chess::kLeftSideRemainder)
     {
         for (int i = 1; i <= remainder; ++i)
@@ -45,7 +45,7 @@ Moves Queen::GetAvailableMoves(ChessGameState* pGameState)
     // if the remainder isn't 7 then we can move right
     if (remainder != Chess::kRightSideRemainder)
     {
-        for (int i = 1; i < (Chess::kBoardWidth) - (remainder); ++i)
+        for (unsigned int i = 1U; i < (Chess::kBoardWidth) - (remainder); ++i)
         {
             int currentIndex = m_index + i;
             Piece* pPiece = pGameState->GetSquare(currentIndex).GetPiece();

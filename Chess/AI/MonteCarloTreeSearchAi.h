@@ -25,8 +25,8 @@ public:
 private:
     Board* m_pBoard;
     int m_player;
-    int m_timesVisited;
-    int m_wins;
+    int m_timesVisited { 0 };
+    int m_wins { 0 };
 };
 
 class Node 
@@ -46,7 +46,7 @@ public:
 private:
     Move m_move;
     State* m_pState;
-    Node* m_pParent;
+    Node* m_pParent { nullptr };
     std::vector<Node*> m_pChildren;
 };
 
@@ -60,7 +60,7 @@ public:
     Node* GetRoot() { return m_pRoot; }
     void SetRoot(Node* pNode) { m_pRoot = pNode; }
 private:
-    Node* m_pRoot;
+    Node* m_pRoot { nullptr };
 };
 
 class MonteCarloTreeSearchAi

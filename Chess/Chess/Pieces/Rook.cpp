@@ -1,5 +1,7 @@
 #include "Rook.h"
 #include "../ChessGameState.h"
+#include <cassert>
+
 
 Rook::Rook(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
     :Piece(pTexture, color, index, Chess::Piece::kRook)
@@ -21,7 +23,7 @@ Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
 
     //horizontal moves
     // if the remainder isnt 0 then we can move left
-    int remainder = m_index % Chess::kBoardWidth;
+    unsigned int remainder = m_index % Chess::kBoardWidth;
     if (remainder != Chess::kLeftSideRemainder)
     {
         for (int i = 1; i <= remainder; ++i)
@@ -47,7 +49,7 @@ Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
     // if the remainder isn't 7 then we can move right
     if (remainder != Chess::kRightSideRemainder)
     {
-        for (int i = 1; i < (Chess::kBoardWidth) - (remainder); ++i)
+        for (unsigned int i = 1U; i < (Chess::kBoardWidth) - (remainder); ++i)
         {
             int currentIndex = m_index + i;
             Piece* pPiece = pGameState->GetSquare(currentIndex).GetPiece();

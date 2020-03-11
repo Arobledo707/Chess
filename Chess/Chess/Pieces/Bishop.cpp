@@ -1,6 +1,8 @@
 #include "Bishop.h"
 #include "../ChessGameState.h"
 #include "../../Constants/Constants.h"
+#include <cassert>
+
 
 Bishop::Bishop(SDL_Texture* pTexture, Chess::Color color, unsigned int index)
     :Piece(pTexture, color, index, Chess::Piece::kBishop)

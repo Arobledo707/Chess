@@ -1,14 +1,14 @@
 #pragma once
 #include "Square.h"
-#include "../Interfaces/Piece.h"
 #include "../Constants/ChessConstants.h"
-#include "Factory/PieceFactory.h"
 #include "../SDLTextureManager.h"
 #include <memory>
 #include <vector>
 
-//TODO call delete
+struct Piece;
+struct King;
 struct SDL_Renderer;
+
 class ChessGameState
 {
 public:
@@ -30,7 +30,6 @@ public:
 private:
     Square m_squares[Chess::kBoardSize];
     std::vector<Piece*> m_pieces;
-    PieceFactory m_pieceFactory;
     King* m_pWhiteKing = nullptr;
     King* m_pBlackKing = nullptr;
 };
