@@ -5,8 +5,7 @@
 #include <memory>
 #include <vector>
 
-struct Piece;
-struct King;
+//struct Piece;
 struct SDL_Renderer;
 
 class ChessGameState
@@ -24,12 +23,12 @@ public:
     Square& GetSquare(unsigned int index);
     void RemovePiece(Piece* pPiece);
     void ReplacePiece(Piece* pPiece, Chess::Piece type, SDLTextureManager* pTexManager);
-    King* GetWhiteKing() const { return m_pWhiteKing; }
-    King* GetBlackKing() const { return m_pBlackKing; }
+    Piece* GetWhiteKing() const { return m_pWhiteKing; }
+    Piece* GetBlackKing() const { return m_pBlackKing; }
     std::vector<Piece*>& GetPieces() { return m_pieces; }
 private:
     Square m_squares[Chess::kBoardSize];
     std::vector<Piece*> m_pieces;
-    King* m_pWhiteKing = nullptr;
-    King* m_pBlackKing = nullptr;
+    Piece* m_pWhiteKing = nullptr;
+    Piece* m_pBlackKing = nullptr;
 };

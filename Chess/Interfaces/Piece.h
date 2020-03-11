@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include <vector>
 #include <SDL.h>
 #include "../Constants/ChessConstants.h"
@@ -18,7 +17,7 @@ public:
 
     Piece(const Piece& piece);
     Piece& operator=(const Piece& piece);
-    Piece& operator=(Piece&& piece);
+    Piece& operator=(Piece&& piece) noexcept;
 
     virtual void Move(unsigned int move);
     void Render(SDL_Renderer* pRenderer) { SDL_RenderCopy(pRenderer, GetTexture(), NULL, &GetRect()); }

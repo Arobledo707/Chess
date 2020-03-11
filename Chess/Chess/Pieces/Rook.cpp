@@ -1,5 +1,6 @@
 #include "Rook.h"
 #include "../ChessGameState.h"
+#include "../../Interfaces/Piece.h"
 #include <cassert>
 
 
@@ -26,7 +27,7 @@ Moves Rook::GetAvailableMoves(ChessGameState* pGameState)
     unsigned int remainder = m_index % Chess::kBoardWidth;
     if (remainder != Chess::kLeftSideRemainder)
     {
-        for (int i = 1; i <= remainder; ++i)
+        for (unsigned int i = 1; i <= remainder; ++i)
         {
             int currentIndex = m_index - i;
             Piece* pPiece = pGameState->GetSquare(currentIndex).GetPiece();

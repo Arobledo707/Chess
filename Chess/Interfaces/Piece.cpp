@@ -24,7 +24,7 @@ Piece& Piece::operator=(const Piece& piece)
     return (*this);
 }
 
-Piece& Piece::operator=(Piece&& piece)
+Piece& Piece::operator=(Piece&& piece) noexcept
 {
      return (piece);
 }
