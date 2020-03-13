@@ -135,6 +135,14 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
             SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move.second).GetRect());
         }
     }
+
+    for (int i = 0; i < Chess::kBoardWidth; ++i) 
+    {
+        //todo finish this when I get back
+        char character = 'a';
+        SDL_SetRenderDrawColor(pRenderer, 60, Chess::kPurple.g, Chess::kPurple.b, 0);
+        SDL_RenderCopy(pRenderer, m_textureManager.GetTexture(character), NULL, &SDL_Rect());
+    }
 }
 
 void ChessBoard::PromotePawn(Chess::Piece type, Piece* pPiece)

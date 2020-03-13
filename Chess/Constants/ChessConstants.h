@@ -39,6 +39,26 @@ namespace Chess
         kInvalid = 'I'
     };
 
+    enum class Coordinate : char
+    {
+        a = 'a',
+        b = 'b',
+        c = 'c',
+        d = 'd',
+        e = 'e',
+        f = 'f',
+        g = 'g',
+        h = 'h',
+        one = '1',
+        two = '2',
+        three = '3',
+        four = '4',
+        five = '5',
+        six = '6',
+        seven = '7',
+        eight = '8',
+    };
+
     static bool IsValidIndex(int index) {
         return index >= 0 && index <= (Chess::kBoardSize - 1);
     }
