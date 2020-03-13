@@ -135,13 +135,18 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
             SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move.second).GetRect());
         }
     }
+    unsigned int squareOffset = 55;
+    SDL_Rect rect{ (Chess::kBoardWidth-1) * Chess::kSquareWidth, ((Chess::kBoardWidth-1) * Chess::kSquareWidth) + squareOffset,
+        Chess::kSquareWidth/4, Chess::kSquareWidth/4 };
+
+    char character = 'a';
 
     for (int i = 0; i < Chess::kBoardWidth; ++i) 
     {
         //todo finish this when I get back
-        char character = 'a';
-        SDL_SetRenderDrawColor(pRenderer, 60, Chess::kPurple.g, Chess::kPurple.b, 0);
-        SDL_RenderCopy(pRenderer, m_textureManager.GetTexture(character), NULL, &SDL_Rect());
+        SDL_RenderCopy(pRenderer, m_textureManager.GetTexture(character), NULL, &rect);
+        ++character;
+        rect.x -= Chess::kSquareWidth;
     }
 }
 

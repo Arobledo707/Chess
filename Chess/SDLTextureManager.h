@@ -30,6 +30,7 @@ private:
 
     static constexpr SDL_Color kBlack{ (Uint8)10, (Uint8)10, (Uint8)10, (Uint8)0 };
     static constexpr SDL_Color kWhite{ (Uint8)500, (Uint8)500, (Uint8)500, (Uint8)0 };
+    static constexpr SDL_Color kRed{ (Uint8)500, (Uint8)0, (Uint8)0, (Uint8)200 };
     static constexpr SDL_Rect kTextRect{ 0, 0, 75, 75 };
 };
 

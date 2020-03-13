@@ -49,8 +49,7 @@ void SDLTextureManager::CreatePieceTexture(TTF_Font* pFont, Chess::Piece piece, 
 
 void SDLTextureManager::CreateCoordinateTexture(TTF_Font* pFont, char character, SDL_Renderer* pRenderer)
 {
-    SDL_Color sdlColor = { 100, 100, 100, 0 };
-    SDL_Surface* pSurface = TTF_RenderText_Solid(pFont, &character, sdlColor);
+    SDL_Surface* pSurface = TTF_RenderText_Solid(pFont, &character, kRed);
     SDL_Texture* pTex = SDL_CreateTextureFromSurface(pRenderer, pSurface);
 
     m_textures.emplace(character, pTex);
