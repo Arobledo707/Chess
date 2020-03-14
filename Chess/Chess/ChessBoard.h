@@ -26,7 +26,7 @@ public:
     virtual const bool OnClick() override;
     void CheckIfPromote(Chess::Piece type);
     void PromotePawn(Chess::Piece type, Piece* pPiece);
-    
+
 private:
     // Inherited via Board
     virtual const int GetPlayerColor() const override;
@@ -45,5 +45,11 @@ private:
     Moves m_moves{};
     Moves m_pastMoves{};
 
+    SDL_Rect m_coordinateLetters{ (Chess::kBoardWidth - 1) * Chess::kSquareWidth, 
+        ((Chess::kBoardWidth) * Chess::kSquareWidth) ,
+    Chess::kSquareWidth / 4, Chess::kSquareWidth / 4 };
+    SDL_Rect m_coordinateNumbers{ Chess::kBoardWidth * Chess::kSquareWidth, 
+        ((Chess::kBoardWidth - 1) * Chess::kSquareWidth),
+    Chess::kSquareWidth / 4, Chess::kSquareWidth / 4 };
 };
 
