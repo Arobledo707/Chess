@@ -135,18 +135,26 @@ void ChessBoard::Render(SDL_Renderer* pRenderer)
             SDL_RenderFillRect(pRenderer, &m_currentState.GetSquare(move.second).GetRect());
         }
     }
-    unsigned int squareOffset = 55;
-    SDL_Rect rect{ (Chess::kBoardWidth-1) * Chess::kSquareWidth, ((Chess::kBoardWidth-1) * Chess::kSquareWidth) + squareOffset,
-        Chess::kSquareWidth/4, Chess::kSquareWidth/4 };
+    //unsigned int squareOffset = 55;
+    //SDL_Rect rect{ (Chess::kBoardWidth-1) * Chess::kSquareWidth, ((Chess::kBoardWidth) * Chess::kSquareWidth) ,
+    //    Chess::kSquareWidth/4, Chess::kSquareWidth/4 };
+
+    SDL_Rect rect2{ Chess::kBoardWidth * Chess::kSquareWidth, ((Chess::kBoardWidth - 1) * Chess::kSquareWidth),
+    Chess::kSquareWidth / 4, Chess::kSquareWidth / 4 };
 
     char character = 'a';
+    char number = '8';
 
     for (int i = 0; i < Chess::kBoardWidth; ++i) 
     {
         //todo finish this when I get back
-        SDL_RenderCopy(pRenderer, m_textureManager.GetTexture(character), NULL, &rect);
+        SDL_RenderCopy(pRenderer, m_textureManager.GetTexture(character), NULL, &Chess::kCoordinateLetters);
         ++character;
         rect.x -= Chess::kSquareWidth;
+
+        SDL_RenderCopy(pRenderer, m_textureManager.GetTexture(number), NULL, &rect2);
+        rect2.y -= Chess::kSquareWidth;
+        --number;
     }
 }
 
